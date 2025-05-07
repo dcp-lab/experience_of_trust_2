@@ -5,16 +5,17 @@
   <title>Consent Form</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; }
-    label { display: block; margin: 10px 0; }
+    label { display: block; margin: 15px 0; font-size: 16px; }
     button { margin-top: 30px; padding: 10px 20px; font-size: 16px; display: block; margin-left: auto; margin-right: auto; }
   </style>
 </head>
 <body>
   <h2>Consent Form</h2>
   <form id="consentForm">
-    <label><input type="checkbox" name="consent1" required> I have read and understood the information provided.</label>
-    <label><input type="checkbox" name="consent2" required> I understand that my participation is voluntary and I may withdraw at any time.</label>
-    <label><input type="checkbox" name="consent3" required> I consent to the anonymous use of my data for research purposes.</label>
+    <label><input type="checkbox" name="consent1" required> I confirm that I have read and understood the information sheet for this study.</label>
+    <label><input type="checkbox" name="consent2" required> I understand that my participation is voluntary and that I am free to withdraw at any time without giving a reason.</label>
+    <label><input type="checkbox" name="consent3" required> I consent to the collection and anonymous use of my responses for academic research purposes.</label>
+    <label><input type="checkbox" name="consent4" required> I am 18 years of age or older.</label>
     <button type="submit">I Consent and Continue</button>
   </form>
 
@@ -24,7 +25,8 @@
       localStorage.setItem("Consent", JSON.stringify({
         consent1: true,
         consent2: true,
-        consent3: true
+        consent3: true,
+        consent4: true
       }));
       window.location.href = "explanation.html";
     });
