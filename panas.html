@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>PANAS Survey</title>
+  
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; }
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; line-height: 1.6; }
     .question { margin-bottom: 20px; }
     .option { display: inline-block; margin-right: 15px; white-space: nowrap; }
     .scale-title { background-color: #f0f0f0; padding: 10px; border-radius: 6px; margin-bottom: 20px; line-height: 1.5; }
     button { margin-top: 30px; padding: 10px 20px; font-size: 16px; }
   </style>
+
 </head>
 <body>
   <h2>PANAS Survey</h2>
@@ -64,9 +66,17 @@
       localStorage.setItem(isPost ? "PANAS_post" : "PANAS_pre", JSON.stringify(data));
       const order = JSON.parse(localStorage.getItem("SurveyOrder"));
       if (isPost) {
-        window.location.href = "stais_post.html";
+        if (order === "PANAS_first") {
+          window.location.href = "stais_post.html";
+        } else {
+          window.location.href = "debrief.html";
+        }
       } else {
-        window.location.href = (order === "PANAS_first") ? "stais.html" : "your_task.html";
+        if (order === "PANAS_first") {
+          window.location.href = "stais.html";
+        } else {
+          window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
+        }
       }
     });
   </script>

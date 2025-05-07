@@ -5,65 +5,48 @@
   <title>Trust Game</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    input[type="number"] { width: 80px; font-size: 16px; padding: 5px; }
+    input[type="number"] { width: 60px; font-size: 16px; padding: 5px; }
     button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h2>Trust Game – Trial <span id="trialNum">1</span>/10</h2>
-  <p>You are Player A and have been given <strong>10 points</strong>. You may send any portion to Player B.</p>
-  <p>The amount you send will be tripled. Player B will then decide how much to return to you.</p>
-
+  <h2>Trust Game</h2>
+  <p>You are Player A and have been given <strong>10 points</strong>. You can send any portion of it to Player B.</p>
+  <p>Whatever you send will be tripled. Player B will then decide how much to return to you.</p>
   <form id="trustForm">
-    <label>Points to send (0–10):</label><br>
+    <label>How many points do you want to send? (0–10)</label><br>
     <input type="number" id="sent" name="sent" min="0" max="10" required><br><br>
-
     <label>How many points do you think Player B will return?</label><br>
     <input type="number" id="returned" name="returned" min="0" required><br><br>
-
     <button type="submit">Submit</button>
   </form>
 
   <script>
-    const trialKey = "TrustGameTrials";
-    const maxTrials = 10;
-    const trialNum = parseInt(localStorage.getItem("TG_trial") || "1");
-    document.getElementById("trialNum").textContent = trialNum;
-
     document.getElementById("trustForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const sent = parseInt(document.getElementById("sent").value, 10);
       const returned = parseInt(document.getElementById("returned").value, 10);
-      const tripled = sent * 3;
 
       if (isNaN(sent) || sent < 0 || sent > 10) {
         alert("Sent points must be between 0 and 10.");
         return;
       }
 
+      const tripled = sent * 3;
+
       if (isNaN(returned) || returned < 0 || returned > tripled) {
         alert("Returned points must be between 0 and " + tripled + ".");
         return;
       }
 
-      const trialData = {
-        trial: trialNum,
+      const results = {
         sent: sent,
         tripled: tripled,
         returned: returned
       };
 
-      const trials = JSON.parse(localStorage.getItem(trialKey) || "[]");
-      trials.push(trialData);
-      localStorage.setItem(trialKey, JSON.stringify(trials));
-
-      if (trialNum < maxTrials) {
-        localStorage.setItem("TG_trial", (trialNum + 1).toString());
-        window.location.href = "waiting.html";
-      } else {
-        localStorage.removeItem("TG_trial");
-        window.location.href = "random_survey.html";
-      }
+      localStorage.setItem("TrustGame", JSON.stringify(results));
+      window.location.href = "waiting.html";
     });
   </script>
 </body>
