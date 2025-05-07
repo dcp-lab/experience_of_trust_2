@@ -1,1 +1,28 @@
-<!-- Content for your_task.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Task</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
+    button { margin-top: 30px; padding: 10px 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>Your Task</h2>
+  <p>You will now be assigned to one of two tasks: either the Dictator Game or the Trust Game.</p>
+  <button onclick="assignTask()">Continue</button>
+
+  <script>
+    function assignTask() {
+      const condition = Math.random() < 0.5 ? "DG" : "TG";
+      localStorage.setItem("Condition", JSON.stringify({ task: condition }));
+      if (condition === "DG") {
+        window.location.href = "dictator_game.html";
+      } else {
+        window.location.href = "trust_game.html";
+      }
+    }
+  </script>
+</body>
+</html>
