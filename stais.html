@@ -53,7 +53,7 @@
       const form = new FormData(this);
       const data = {};
       let complete = true;
-      for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I am regretful', 'I feel at ease', 'I feel upset', 'I am currently worried<br>about possible misfortunes', 'I feel rested', 'I feel anxious', 'I feel comfortable', 'I feel self-confident', 'I feel joyous', 'I am jittery', "I feel 'high-strung'", 'I am relaxed', 'I feel content', 'I am worried', 'I feel overexcited and rattled', 'I feel joyful', 'I feel fine']) {
+      for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I am regretful', 'I feel at ease', 'I feel upset', 'I am currently worried about possible misfortunes', 'I feel rested', 'I feel anxious', 'I feel comfortable', 'I feel self-confident', 'I feel joyous', 'I am jittery', "I feel 'high-strung'", 'I am relaxed', 'I feel content', 'I am worried', 'I feel overexcited and rattled', 'I feel joyful', 'I feel fine']) {
         const val = form.get(item);
         if (!val) complete = false;
         data[item] = val;
