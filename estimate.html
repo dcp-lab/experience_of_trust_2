@@ -1,1 +1,31 @@
-<!-- Content for estimate.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Estimate</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
+    input[type="number"] { font-size: 16px; padding: 6px; width: 80px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>Estimate</h2>
+  <p>Before beginning the task, please estimate the average number of points you believe participants typically give in this experiment.</p>
+
+  <form id="estimateForm">
+    <input type="number" name="estimate" min="0" max="100" required> points
+    <br><br>
+    <button type="submit">Continue</button>
+  </form>
+
+  <script>
+    document.getElementById("estimateForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const estimate = parseInt(new FormData(this).get("estimate"));
+      localStorage.setItem("Estimate", JSON.stringify({ value: estimate }));
+      window.location.href = "your_task.html";
+    });
+  </script>
+</body>
+</html>
