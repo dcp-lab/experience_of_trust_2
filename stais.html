@@ -52,7 +52,6 @@
 
     <button type="submit">Next</button>
   </form>
-
   <script>
     document.getElementById("staisForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -60,16 +59,22 @@
       const data = {};
       let complete = true;
       for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I feel strained', 'I feel at ease', 'I feel upset', 'I am presently worrying over possible misfortunes', 'I feel satisfied', 'I feel frightened', 'I feel comfortable', 'I feel self-confident', 'I feel nervous', 'I am jittery', 'I feel indecisive', 'I am relaxed', 'I feel content', 'I am worried', 'I feel confused', 'I feel steady', 'I feel pleasant']) {
-        const value = form.get(item);
-        if (!value) complete = false;
-        data[item] = value;
+        const val = form.get(item);
+        if (!val) complete = false;
+        data[item] = val;
       }
       if (!complete) {
-        alert("Please answer all items before continuing.");
+        alert("Please complete all items.");
         return;
       }
-      localStorage.setItem("STAIS_pre", JSON.stringify(data));
-      window.location.href = "waiting.html";
+      const isPost = window.location.pathname.includes("post");
+      localStorage.setItem(isPost ? "STAIS_post" : "STAIS_pre", JSON.stringify(data));
+      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      if (isPost) {
+        window.location.href = "debrief.html";
+      } else {
+        window.location.href = (order === "STAIS_first") ? "panas.html" : "your_task.html";
+      }
     });
   </script>
 </body>
