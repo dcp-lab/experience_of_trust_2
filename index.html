@@ -16,20 +16,7 @@
 
   <script>
     function startExperiment() {
-      // Randomize condition: DG or TG
-      const condition = Math.random() < 0.5 ? "DG" : "TG";
-      localStorage.setItem("Condition", JSON.stringify({ task: condition }));
-
-      // Randomize survey order
-      const order = Math.random() < 0.5 ? "PANAS_first" : "STAIS_first";
-      localStorage.setItem("SurveyOrder", JSON.stringify(order));
-
-      // Redirect to first survey
-      if (order === "PANAS_first") {
-        window.location.href = "panas.html";
-      } else {
-        window.location.href = "stais.html";
-      }
+      window.location.href = "pre_information.html";
     }
   </script>
 </body>
