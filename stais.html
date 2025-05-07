@@ -3,52 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>STAIS Survey</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; }
+    .question { margin-bottom: 20px; }
+    .option { display: inline-block; margin-right: 20px; white-space: nowrap; }
+    .scale-title { background-color: #f0f0f0; padding: 10px; border-radius: 6px; margin-bottom: 20px; line-height: 1.5; }
+    button { margin-top: 30px; padding: 10px 20px; font-size: 16px; }
+  </style>
 </head>
 <body>
   <h2>STAIS Survey</h2>
-  <p>Please indicate how you feel <strong>right now</strong>.</p>
+  
+<div class="scale-title">
+  <b>Instructions:</b><br><br>
+  Some statements that people have used to describe their feelings are given below.
+  Read each statement and then select the response option to the right that best indicates
+  how you feel <b>right now</b>, that is, at this moment.
+</div>
+
   <form id="staisForm">
-    <div><label>1. I feel calm</label><br>
-<input type="radio" name="I feel calm" value="1" required> Not at all <input type="radio" name="I feel calm" value="2" required> Somewhat <input type="radio" name="I feel calm" value="3" required> Moderately so <input type="radio" name="I feel calm" value="4" required> Very much so </div><br>
-<div><label>2. I feel secure</label><br>
-<input type="radio" name="I feel secure" value="1" required> Not at all <input type="radio" name="I feel secure" value="2" required> Somewhat <input type="radio" name="I feel secure" value="3" required> Moderately so <input type="radio" name="I feel secure" value="4" required> Very much so </div><br>
-<div><label>3. I am tense</label><br>
-<input type="radio" name="I am tense" value="1" required> Not at all <input type="radio" name="I am tense" value="2" required> Somewhat <input type="radio" name="I am tense" value="3" required> Moderately so <input type="radio" name="I am tense" value="4" required> Very much so </div><br>
-<div><label>4. I feel strained</label><br>
-<input type="radio" name="I feel strained" value="1" required> Not at all <input type="radio" name="I feel strained" value="2" required> Somewhat <input type="radio" name="I feel strained" value="3" required> Moderately so <input type="radio" name="I feel strained" value="4" required> Very much so </div><br>
-<div><label>5. I feel at ease</label><br>
-<input type="radio" name="I feel at ease" value="1" required> Not at all <input type="radio" name="I feel at ease" value="2" required> Somewhat <input type="radio" name="I feel at ease" value="3" required> Moderately so <input type="radio" name="I feel at ease" value="4" required> Very much so </div><br>
-<div><label>6. I feel upset</label><br>
-<input type="radio" name="I feel upset" value="1" required> Not at all <input type="radio" name="I feel upset" value="2" required> Somewhat <input type="radio" name="I feel upset" value="3" required> Moderately so <input type="radio" name="I feel upset" value="4" required> Very much so </div><br>
-<div><label>7. I am presently worrying over possible misfortunes</label><br>
-<input type="radio" name="I am presently worrying over possible misfortunes" value="1" required> Not at all <input type="radio" name="I am presently worrying over possible misfortunes" value="2" required> Somewhat <input type="radio" name="I am presently worrying over possible misfortunes" value="3" required> Moderately so <input type="radio" name="I am presently worrying over possible misfortunes" value="4" required> Very much so </div><br>
-<div><label>8. I feel satisfied</label><br>
-<input type="radio" name="I feel satisfied" value="1" required> Not at all <input type="radio" name="I feel satisfied" value="2" required> Somewhat <input type="radio" name="I feel satisfied" value="3" required> Moderately so <input type="radio" name="I feel satisfied" value="4" required> Very much so </div><br>
-<div><label>9. I feel frightened</label><br>
-<input type="radio" name="I feel frightened" value="1" required> Not at all <input type="radio" name="I feel frightened" value="2" required> Somewhat <input type="radio" name="I feel frightened" value="3" required> Moderately so <input type="radio" name="I feel frightened" value="4" required> Very much so </div><br>
-<div><label>10. I feel comfortable</label><br>
-<input type="radio" name="I feel comfortable" value="1" required> Not at all <input type="radio" name="I feel comfortable" value="2" required> Somewhat <input type="radio" name="I feel comfortable" value="3" required> Moderately so <input type="radio" name="I feel comfortable" value="4" required> Very much so </div><br>
-<div><label>11. I feel self-confident</label><br>
-<input type="radio" name="I feel self-confident" value="1" required> Not at all <input type="radio" name="I feel self-confident" value="2" required> Somewhat <input type="radio" name="I feel self-confident" value="3" required> Moderately so <input type="radio" name="I feel self-confident" value="4" required> Very much so </div><br>
-<div><label>12. I feel nervous</label><br>
-<input type="radio" name="I feel nervous" value="1" required> Not at all <input type="radio" name="I feel nervous" value="2" required> Somewhat <input type="radio" name="I feel nervous" value="3" required> Moderately so <input type="radio" name="I feel nervous" value="4" required> Very much so </div><br>
-<div><label>13. I am jittery</label><br>
-<input type="radio" name="I am jittery" value="1" required> Not at all <input type="radio" name="I am jittery" value="2" required> Somewhat <input type="radio" name="I am jittery" value="3" required> Moderately so <input type="radio" name="I am jittery" value="4" required> Very much so </div><br>
-<div><label>14. I feel indecisive</label><br>
-<input type="radio" name="I feel indecisive" value="1" required> Not at all <input type="radio" name="I feel indecisive" value="2" required> Somewhat <input type="radio" name="I feel indecisive" value="3" required> Moderately so <input type="radio" name="I feel indecisive" value="4" required> Very much so </div><br>
-<div><label>15. I am relaxed</label><br>
-<input type="radio" name="I am relaxed" value="1" required> Not at all <input type="radio" name="I am relaxed" value="2" required> Somewhat <input type="radio" name="I am relaxed" value="3" required> Moderately so <input type="radio" name="I am relaxed" value="4" required> Very much so </div><br>
-<div><label>16. I feel content</label><br>
-<input type="radio" name="I feel content" value="1" required> Not at all <input type="radio" name="I feel content" value="2" required> Somewhat <input type="radio" name="I feel content" value="3" required> Moderately so <input type="radio" name="I feel content" value="4" required> Very much so </div><br>
-<div><label>17. I am worried</label><br>
-<input type="radio" name="I am worried" value="1" required> Not at all <input type="radio" name="I am worried" value="2" required> Somewhat <input type="radio" name="I am worried" value="3" required> Moderately so <input type="radio" name="I am worried" value="4" required> Very much so </div><br>
-<div><label>18. I feel confused</label><br>
-<input type="radio" name="I feel confused" value="1" required> Not at all <input type="radio" name="I feel confused" value="2" required> Somewhat <input type="radio" name="I feel confused" value="3" required> Moderately so <input type="radio" name="I feel confused" value="4" required> Very much so </div><br>
-<div><label>19. I feel steady</label><br>
-<input type="radio" name="I feel steady" value="1" required> Not at all <input type="radio" name="I feel steady" value="2" required> Somewhat <input type="radio" name="I feel steady" value="3" required> Moderately so <input type="radio" name="I feel steady" value="4" required> Very much so </div><br>
-<div><label>20. I feel pleasant</label><br>
-<input type="radio" name="I feel pleasant" value="1" required> Not at all <input type="radio" name="I feel pleasant" value="2" required> Somewhat <input type="radio" name="I feel pleasant" value="3" required> Moderately so <input type="radio" name="I feel pleasant" value="4" required> Very much so </div><br>
+    <div class='question'><label>1. I feel calm</label><br><label class="option"><input type="radio" name="I feel calm" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel calm" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel calm" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel calm" value="4" required> Very much so</label> </div>
+<div class='question'><label>2. I feel secure</label><br><label class="option"><input type="radio" name="I feel secure" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel secure" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel secure" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel secure" value="4" required> Very much so</label> </div>
+<div class='question'><label>3. I am tense</label><br><label class="option"><input type="radio" name="I am tense" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am tense" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am tense" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am tense" value="4" required> Very much so</label> </div>
+<div class='question'><label>4. I am regretful</label><br><label class="option"><input type="radio" name="I am regretful" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am regretful" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am regretful" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am regretful" value="4" required> Very much so</label> </div>
+<div class='question'><label>5. I feel at ease</label><br><label class="option"><input type="radio" name="I feel at ease" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel at ease" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel at ease" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel at ease" value="4" required> Very much so</label> </div>
+<div class='question'><label>6. I feel upset</label><br><label class="option"><input type="radio" name="I feel upset" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel upset" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel upset" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel upset" value="4" required> Very much so</label> </div>
+<div class='question'><label>7. I am currently worried<br>about possible misfortunes</label><br><label class="option"><input type="radio" name="I am currently worried<br>about possible misfortunes" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am currently worried<br>about possible misfortunes" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am currently worried<br>about possible misfortunes" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am currently worried<br>about possible misfortunes" value="4" required> Very much so</label> </div>
+<div class='question'><label>8. I feel rested</label><br><label class="option"><input type="radio" name="I feel rested" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel rested" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel rested" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel rested" value="4" required> Very much so</label> </div>
+<div class='question'><label>9. I feel anxious</label><br><label class="option"><input type="radio" name="I feel anxious" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel anxious" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel anxious" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel anxious" value="4" required> Very much so</label> </div>
+<div class='question'><label>10. I feel comfortable</label><br><label class="option"><input type="radio" name="I feel comfortable" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel comfortable" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel comfortable" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel comfortable" value="4" required> Very much so</label> </div>
+<div class='question'><label>11. I feel self-confident</label><br><label class="option"><input type="radio" name="I feel self-confident" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel self-confident" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel self-confident" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel self-confident" value="4" required> Very much so</label> </div>
+<div class='question'><label>12. I feel joyous</label><br><label class="option"><input type="radio" name="I feel joyous" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel joyous" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel joyous" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel joyous" value="4" required> Very much so</label> </div>
+<div class='question'><label>13. I am jittery</label><br><label class="option"><input type="radio" name="I am jittery" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am jittery" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am jittery" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am jittery" value="4" required> Very much so</label> </div>
+<div class='question'><label>14. I feel 'high-strung'</label><br><label class="option"><input type="radio" name="I feel 'high-strung'" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel 'high-strung'" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel 'high-strung'" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel 'high-strung'" value="4" required> Very much so</label> </div>
+<div class='question'><label>15. I am relaxed</label><br><label class="option"><input type="radio" name="I am relaxed" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am relaxed" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am relaxed" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am relaxed" value="4" required> Very much so</label> </div>
+<div class='question'><label>16. I feel content</label><br><label class="option"><input type="radio" name="I feel content" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel content" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel content" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel content" value="4" required> Very much so</label> </div>
+<div class='question'><label>17. I am worried</label><br><label class="option"><input type="radio" name="I am worried" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I am worried" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I am worried" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I am worried" value="4" required> Very much so</label> </div>
+<div class='question'><label>18. I feel overexcited and rattled</label><br><label class="option"><input type="radio" name="I feel overexcited and rattled" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel overexcited and rattled" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel overexcited and rattled" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel overexcited and rattled" value="4" required> Very much so</label> </div>
+<div class='question'><label>19. I feel joyful</label><br><label class="option"><input type="radio" name="I feel joyful" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel joyful" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel joyful" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel joyful" value="4" required> Very much so</label> </div>
+<div class='question'><label>20. I feel fine</label><br><label class="option"><input type="radio" name="I feel fine" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel fine" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel fine" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel fine" value="4" required> Very much so</label> </div>
 
     <button type="submit">Next</button>
   </form>
@@ -58,7 +51,7 @@
       const form = new FormData(this);
       const data = {};
       let complete = true;
-      for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I feel strained', 'I feel at ease', 'I feel upset', 'I am presently worrying over possible misfortunes', 'I feel satisfied', 'I feel frightened', 'I feel comfortable', 'I feel self-confident', 'I feel nervous', 'I am jittery', 'I feel indecisive', 'I am relaxed', 'I feel content', 'I am worried', 'I feel confused', 'I feel steady', 'I feel pleasant']) {
+      for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I am regretful', 'I feel at ease', 'I feel upset', 'I am currently worried<br>about possible misfortunes', 'I feel rested', 'I feel anxious', 'I feel comfortable', 'I feel self-confident', 'I feel joyous', 'I am jittery', "I feel 'high-strung'", 'I am relaxed', 'I feel content', 'I am worried', 'I feel overexcited and rattled', 'I feel joyful', 'I feel fine']) {
         const val = form.get(item);
         if (!val) complete = false;
         data[item] = val;
