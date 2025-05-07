@@ -1,12 +1,11 @@
 
-
 <script>
   function goToNext() {
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
     if (order === "STAIS_first") {
-      window.location.href = "panas.html";
-    } else {
       window.location.href = "your_task.html";
+    } else {
+      window.location.href = "panas.html";
     }
   }
 </script>
