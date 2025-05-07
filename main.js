@@ -1,1 +1,1 @@
-<!-- Content for main.js -->
+// Placeholder for shared JS logic
