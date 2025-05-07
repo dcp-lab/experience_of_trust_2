@@ -4,28 +4,51 @@
   <meta charset="UTF-8">
   <title>Estimate</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    input[type="number"] { font-size: 16px; padding: 6px; width: 80px; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }
+    label, p { font-size: 16px; }
+    input[type="number"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 24px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h2>Estimate</h2>
-  <p>Before beginning the task, please estimate the average number of points you believe participants typically give in this experiment.</p>
+  <h2>Expectation</h2>
+  <p><b>You have been assigned to a <u>Player B</u> role.</b></p>
+  <p>In each round, a new participant (Player A) will choose how much to send you from their initial endowment of 12 units.</p>
+  <p><b>Based on this, how much of Player A's 12 monetary units do you expect to receive on average per trial?</b></p>
 
-  <form id="estimateForm">
-    <input type="number" name="estimate" min="0" max="100" required> points
-    <br><br>
-    <button type="submit">Continue</button>
-  </form>
+  <input type="number" id="estimateInput" placeholder="Enter your estimate between 0 and 12 (e.g., 8)" min="0" max="12" step="0.1" required>
+
+  <button onclick="submitEstimate()">Continue</button>
 
   <script>
-    document.getElementById("estimateForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const estimate = parseInt(new FormData(this).get("estimate"));
-      localStorage.setItem("Estimate", JSON.stringify({ value: estimate }));
-      window.location.href = "your_task.html";
-    });
+    function submitEstimate() {
+      const input = document.getElementById("estimateInput");
+      const value = parseFloat(input.value);
+      if (isNaN(value) || value < 0 || value > 12) {
+        alert("Please enter a valid number between 0 and 12.");
+        return;
+      }
+
+      localStorage.setItem("Estimate", JSON.stringify({ averageExpected: value }));
+
+      const condition = JSON.parse(localStorage.getItem("Condition"))?.task;
+      if (condition === "DG") {
+        window.location.href = "dictator_game.html";
+      } else {
+        window.location.href = "trust_game.html";
+      }
+    }
   </script>
 </body>
 </html>
