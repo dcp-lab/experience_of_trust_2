@@ -69,5 +69,15 @@
       }
     });
   </script>
+
+<script>
+  function goToNext() {
+    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    const nextPage = order === "PANAS_first" ? "panas.html" : "stais.html";
+    window.location.href = nextPage;
+  }
+</script>
+<button onclick="goToNext()">Continue</button>
+
 </body>
 </html>

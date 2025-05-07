@@ -80,5 +80,18 @@
       }
     });
   </script>
+
+<script>
+  function goToNext() {
+    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    if (order === "PANAS_first") {
+      window.location.href = "stais.html";
+    } else {
+      window.location.href = "your_task.html";
+    }
+  }
+</script>
+<button onclick="goToNext()">Continue</button>
+
 </body>
 </html>
