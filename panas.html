@@ -45,8 +45,13 @@
 <div class='question'><label>19. Active</label><br><label class="option"><input type="radio" name="Active" value="1" required> Very slightly or not at all</label> <label class="option"><input type="radio" name="Active" value="2" required> A little</label> <label class="option"><input type="radio" name="Active" value="3" required> Moderately</label> <label class="option"><input type="radio" name="Active" value="4" required> Quite a bit</label> <label class="option"><input type="radio" name="Active" value="5" required> Extremely</label> </div>
 <div class='question'><label>20. Afraid</label><br><label class="option"><input type="radio" name="Afraid" value="1" required> Very slightly or not at all</label> <label class="option"><input type="radio" name="Afraid" value="2" required> A little</label> <label class="option"><input type="radio" name="Afraid" value="3" required> Moderately</label> <label class="option"><input type="radio" name="Afraid" value="4" required> Quite a bit</label> <label class="option"><input type="radio" name="Afraid" value="5" required> Extremely</label> </div>
 
-    <button type="submit">Next</button>
-  </form>
+    
+  
+<button onclick="document.getElementById('panasForm').dispatchEvent(new Event('submit', { cancelable: true }));">
+  Continue
+</button>
+</form>
+
   <script>
     document.getElementById("panasForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -81,17 +86,8 @@
     });
   </script>
 
-<script>
-  function goToNext() {
-    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    if (order === "PANAS_first") {
-      window.location.href = "stais.html";
-    } else {
-      window.location.href = "your_task.html";
-    }
-  }
-</script>
-<button onclick="goToNext()">Continue</button>
+
+
 
 </body>
 </html>
