@@ -58,7 +58,7 @@
       if (order === "STAIS_first") {
         window.location.href = "panas.html";
       } else {
-        window.location.href = "your_task.html";
+        window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
       }
     });
   </script>
