@@ -42,7 +42,7 @@
 <div class='question'><label>9. Self-Respect</label><br><label class="option"><input type="radio" name="Self-Respect" value="-1" required> -1</label> <label class="option"><input type="radio" name="Self-Respect" value="0" required> 0</label> <label class="option"><input type="radio" name="Self-Respect" value="1" required> 1</label> <label class="option"><input type="radio" name="Self-Respect" value="2" required> 2</label> <label class="option"><input type="radio" name="Self-Respect" value="3" required> 3</label> <label class="option"><input type="radio" name="Self-Respect" value="4" required> 4</label> <label class="option"><input type="radio" name="Self-Respect" value="5" required> 5</label> </div>
 <div class='question'><label>10. True Friendship</label><br><label class="option"><input type="radio" name="True Friendship" value="-1" required> -1</label> <label class="option"><input type="radio" name="True Friendship" value="0" required> 0</label> <label class="option"><input type="radio" name="True Friendship" value="1" required> 1</label> <label class="option"><input type="radio" name="True Friendship" value="2" required> 2</label> <label class="option"><input type="radio" name="True Friendship" value="3" required> 3</label> <label class="option"><input type="radio" name="True Friendship" value="4" required> 4</label> <label class="option"><input type="radio" name="True Friendship" value="5" required> 5</label> </div>
 
-    <button type="submit">Next</button>
+    
   </form>
 
   <script>
@@ -70,14 +70,44 @@
     });
   </script>
 
+
+
+
+
 <script>
-  function goToNext() {
+  document.getElementById("ssvsForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    const data = {};
+    let complete = true;
+
+    // Reset any previous highlights
+    document.querySelectorAll('.question').forEach(q => q.style.backgroundColor = "");
+
+    const questions = ['Equality', 'Inner Harmony', 'Social Power', 'Pleasure', 'Freedom', 'A Spiritual Life', 'Meaning in Life', 'National Security', 'Self-Respect', 'True Friendship'];
+    for (let item of questions) {
+      const val = form.get(item);
+      if (!val) {
+        complete = false;
+        // Highlight the corresponding question
+        const questionElem = [...document.querySelectorAll('.question')].find(q => q.textContent.includes(item));
+        if (questionElem) questionElem.style.backgroundColor = "#ffe6e6";
+      }
+      data[item] = val;
+    }
+
+    if (!complete) {
+      alert("Please answer all items. Highlighted in red.");
+      return;
+    }
+
+    localStorage.setItem("SSVS", JSON.stringify(data));
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    const nextPage = order === "PANAS_first" ? "panas.html" : "stais.html";
-    window.location.href = nextPage;
-  }
+    window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
+  });
 </script>
-<button onclick="goToNext()">Continue</button>
+
+<button onclick="document.getElementById('ssvsForm').dispatchEvent(new Event('submit', { cancelable: true }))">Continue</button>
 
 </body>
 </html>

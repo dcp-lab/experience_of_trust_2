@@ -55,16 +55,9 @@
       }
       localStorage.setItem("STAIS", JSON.stringify(responses));
       const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-      
-
-if (order === "STAIS_first") {
-  window.location.href = "panas.html";
-} else {
-  const task = JSON.parse(localStorage.getItem("Condition"))?.task;
-  window.location.href = task === "TG" ? "your_task_tg.html" : "your_task_dg.html";
-}
-
- else {
+      if (order === "STAIS_first") {
+        window.location.href = "your_task.html";
+      } else {
         window.location.href = "panas.html";
       }
     });
