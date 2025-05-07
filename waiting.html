@@ -1,1 +1,26 @@
-<!-- Content for waiting.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waiting...</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 100px; }
+  </style>
+</head>
+<body>
+  <h2>Please wait...</h2>
+  <p>Waiting for the decision of the next Player A...</p>
+
+  <script>
+    setTimeout(() => {
+      // Decide which post-survey comes first based on PANAS/STAIS order
+      const order = JSON.parse(localStorage.getItem("SurveyOrder")) || "PANAS_first";
+      if (order === "PANAS_first") {
+        window.location.href = "panas_post.html";
+      } else {
+        window.location.href = "stais_post.html";
+      }
+    }, 3000);
+  </script>
+</body>
+</html>
