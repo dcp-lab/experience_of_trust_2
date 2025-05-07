@@ -4,24 +4,59 @@
   <meta charset="UTF-8">
   <title>Your Task</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    button { margin-top: 30px; padding: 10px 20px; font-size: 16px; }
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; line-height: 1.6; }
+    h2 { text-align: center; color: #003366; }
+    .instruction-box { background-color: #f9f9f9; padding: 20px; border-radius: 6px; margin-bottom: 30px; }
+    button { display: block; margin: 40px auto 0; padding: 12px 24px; font-size: 16px; }
   </style>
 </head>
 <body>
   <h2>Your Task</h2>
-  <p>You will now be assigned to one of two tasks: either the Dictator Game or the Trust Game.</p>
-  <button onclick="assignTask()">Continue</button>
+  <div id="instruction" class="instruction-box">
+    <!-- Will be filled by JS -->
+  </div>
+  <button onclick="window.location.href='estimate.html'">Continue</button>
 
   <script>
-    function assignTask() {
-      const condition = Math.random() < 0.5 ? "DG" : "TG";
-      localStorage.setItem("Condition", JSON.stringify({ task: condition }));
-      if (condition === "DG") {
-        window.location.href = "dictator_game.html";
-      } else {
-        window.location.href = "trust_game.html";
-      }
+    const condition = JSON.parse(localStorage.getItem("Condition"))?.task;
+
+    const DGText = `
+      <b>Dictator Game Instructions</b><br>
+      You are going to participate in a game interacting with other participants.
+      This game consists of ten trials. In each trial, you will be paired with a new online participant, and both of you will be given 12 monetary units.
+      If you are randomly assigned to the role of Player A, you may choose to send any number of your 12 units to Player B.
+      The amount you send will be tripled. Player B does nothing and only receives.<br><br>
+      <b>Bonus</b><br>
+      Your bonus depends on how much you keep or receive over all trials. Each unit is worth £0.002.
+    `;
+
+    const TGText = `
+      <b>Trust Game Instructions</b><br>
+      You are going to participate in a game interacting with other participants.
+      This game consists of ten trials. In each trial, you will be paired with a new online participant, and both of you will be given 12 monetary units.
+      You will be randomly assigned to the role of either Player A or Player B.<br><br>
+
+      <b>Player A role</b><br>
+      You may choose to send any number of your 12 units to Player B.
+      The amount you send will be tripled.
+      You will get access to Player B’s SSVS answers before deciding.<br><br>
+
+      <b>Player B role</b><br>
+      You will receive the tripled amount sent by Player A.
+      Player A sees your SSVS answers before sending.<br><br>
+
+      <b>Bonus</b><br>
+      You and the other participant are paid the cumulative amount you hold at the end.
+      Each unit is worth £0.002.
+    `;
+
+    const box = document.getElementById("instruction");
+    if (condition === "DG") {
+      box.innerHTML = DGText;
+    } else if (condition === "TG") {
+      box.innerHTML = TGText;
+    } else {
+      box.innerHTML = "<p>Error: Game condition not set. Please restart the experiment.</p>";
     }
   </script>
 </body>
