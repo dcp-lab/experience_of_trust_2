@@ -10,9 +10,10 @@
   </style>
 </head>
 <body>
-  <h2>Dictator Game</h2>
-  <p>You have been given <strong>100 points</strong>. You may give any portion of them to another participant.</p>
+  <h2>Dictator Game – Trial <span id="trialNum">1</span>/3</h2>
+  <p>You have been given <strong>100 points</strong>. You may give any portion to another participant.</p>
   <p>How many points do you want to give?</p>
+
   <form id="dictatorForm">
     <input type="number" name="given" min="0" max="100" required> / 100
     <br><br>
@@ -20,20 +21,30 @@
   </form>
 
   <script>
+    const trialKey = "DictatorGameTrials";
+    const trialNum = parseInt(localStorage.getItem("DG_trial") || "1");
+    document.getElementById("trialNum").textContent = trialNum;
+
     document.getElementById("dictatorForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const form = new FormData(this);
-      const value = parseInt(form.get("given"), 10);
-      if (isNaN(value) || value < 0 || value > 100) {
-        alert("Please enter a value between 0 and 100.");
+      const given = parseInt(new FormData(this).get("given"));
+      if (isNaN(given) || given < 0 || given > 100) {
+        alert("Enter a value between 0 and 100.");
         return;
       }
-      const results = {
-        given: value,
-        kept: 100 - value
-      };
-      localStorage.setItem("DictatorGame", JSON.stringify(results));
-      window.location.href = "waiting.html";
+
+      const result = { trial: trialNum, given: given, kept: 100 - given };
+      const trials = JSON.parse(localStorage.getItem(trialKey) || "[]");
+      trials.push(result);
+      localStorage.setItem(trialKey, JSON.stringify(trials));
+
+      if (trialNum < 3) {
+        localStorage.setItem("DG_trial", (trialNum + 1).toString());
+        window.location.href = "waiting.html";
+      } else {
+        localStorage.removeItem("DG_trial");
+        window.location.href = "random_survey.html";
+      }
     });
   </script>
 </body>
