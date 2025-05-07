@@ -1,1 +1,62 @@
-<!-- Content for ssvs.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SSVS Survey</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label { font-weight: bold; }
+    .question { margin-bottom: 15px; }
+    button { margin-top: 20px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>SSVS Survey</h2>
+  <p>Please indicate the importance of each value as a guiding principle in your life.<br>
+  Use a scale from 1 (Not important at all) to 7 (Extremely important).</p>
+  <form id="ssvsForm">
+    <div><label>1. Equality</label><br>
+<input type="radio" name="Equality" value="1" required> 1 <input type="radio" name="Equality" value="2" required> 2 <input type="radio" name="Equality" value="3" required> 3 <input type="radio" name="Equality" value="4" required> 4 <input type="radio" name="Equality" value="5" required> 5 <input type="radio" name="Equality" value="6" required> 6 <input type="radio" name="Equality" value="7" required> 7 </div><br>
+<div><label>2. Inner Harmony</label><br>
+<input type="radio" name="Inner Harmony" value="1" required> 1 <input type="radio" name="Inner Harmony" value="2" required> 2 <input type="radio" name="Inner Harmony" value="3" required> 3 <input type="radio" name="Inner Harmony" value="4" required> 4 <input type="radio" name="Inner Harmony" value="5" required> 5 <input type="radio" name="Inner Harmony" value="6" required> 6 <input type="radio" name="Inner Harmony" value="7" required> 7 </div><br>
+<div><label>3. Social Power</label><br>
+<input type="radio" name="Social Power" value="1" required> 1 <input type="radio" name="Social Power" value="2" required> 2 <input type="radio" name="Social Power" value="3" required> 3 <input type="radio" name="Social Power" value="4" required> 4 <input type="radio" name="Social Power" value="5" required> 5 <input type="radio" name="Social Power" value="6" required> 6 <input type="radio" name="Social Power" value="7" required> 7 </div><br>
+<div><label>4. Pleasure</label><br>
+<input type="radio" name="Pleasure" value="1" required> 1 <input type="radio" name="Pleasure" value="2" required> 2 <input type="radio" name="Pleasure" value="3" required> 3 <input type="radio" name="Pleasure" value="4" required> 4 <input type="radio" name="Pleasure" value="5" required> 5 <input type="radio" name="Pleasure" value="6" required> 6 <input type="radio" name="Pleasure" value="7" required> 7 </div><br>
+<div><label>5. Freedom</label><br>
+<input type="radio" name="Freedom" value="1" required> 1 <input type="radio" name="Freedom" value="2" required> 2 <input type="radio" name="Freedom" value="3" required> 3 <input type="radio" name="Freedom" value="4" required> 4 <input type="radio" name="Freedom" value="5" required> 5 <input type="radio" name="Freedom" value="6" required> 6 <input type="radio" name="Freedom" value="7" required> 7 </div><br>
+<div><label>6. A Spiritual Life</label><br>
+<input type="radio" name="A Spiritual Life" value="1" required> 1 <input type="radio" name="A Spiritual Life" value="2" required> 2 <input type="radio" name="A Spiritual Life" value="3" required> 3 <input type="radio" name="A Spiritual Life" value="4" required> 4 <input type="radio" name="A Spiritual Life" value="5" required> 5 <input type="radio" name="A Spiritual Life" value="6" required> 6 <input type="radio" name="A Spiritual Life" value="7" required> 7 </div><br>
+<div><label>7. Meaning in Life</label><br>
+<input type="radio" name="Meaning in Life" value="1" required> 1 <input type="radio" name="Meaning in Life" value="2" required> 2 <input type="radio" name="Meaning in Life" value="3" required> 3 <input type="radio" name="Meaning in Life" value="4" required> 4 <input type="radio" name="Meaning in Life" value="5" required> 5 <input type="radio" name="Meaning in Life" value="6" required> 6 <input type="radio" name="Meaning in Life" value="7" required> 7 </div><br>
+<div><label>8. National Security</label><br>
+<input type="radio" name="National Security" value="1" required> 1 <input type="radio" name="National Security" value="2" required> 2 <input type="radio" name="National Security" value="3" required> 3 <input type="radio" name="National Security" value="4" required> 4 <input type="radio" name="National Security" value="5" required> 5 <input type="radio" name="National Security" value="6" required> 6 <input type="radio" name="National Security" value="7" required> 7 </div><br>
+<div><label>9. Self-Respect</label><br>
+<input type="radio" name="Self-Respect" value="1" required> 1 <input type="radio" name="Self-Respect" value="2" required> 2 <input type="radio" name="Self-Respect" value="3" required> 3 <input type="radio" name="Self-Respect" value="4" required> 4 <input type="radio" name="Self-Respect" value="5" required> 5 <input type="radio" name="Self-Respect" value="6" required> 6 <input type="radio" name="Self-Respect" value="7" required> 7 </div><br>
+<div><label>10. True Friendship</label><br>
+<input type="radio" name="True Friendship" value="1" required> 1 <input type="radio" name="True Friendship" value="2" required> 2 <input type="radio" name="True Friendship" value="3" required> 3 <input type="radio" name="True Friendship" value="4" required> 4 <input type="radio" name="True Friendship" value="5" required> 5 <input type="radio" name="True Friendship" value="6" required> 6 <input type="radio" name="True Friendship" value="7" required> 7 </div><br>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <script>
+    document.getElementById("ssvsForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      const data = {};
+      let complete = true;
+      for (let item of ['Equality', 'Inner Harmony', 'Social Power', 'Pleasure', 'Freedom', 'A Spiritual Life', 'Meaning in Life', 'National Security', 'Self-Respect', 'True Friendship']) {
+        const value = form.get(item);
+        if (!value) complete = false;
+        data[item] = value;
+      }
+      if (!complete) {
+        alert("Please answer all items before continuing.");
+        return;
+      }
+      localStorage.setItem("SSVS", JSON.stringify(data));
+      window.location.href = "waiting.html";
+    });
+  </script>
+</body>
+</html>
