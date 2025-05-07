@@ -1,1 +1,25 @@
-<!DOCTYPE html><html><body><h1>Experiment Start</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Start Experiment</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
+    button { margin-top: 30px; padding: 12px 24px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Experiment</h1>
+  <p>This experiment investigates decision-making and emotions. It takes approximately 15–20 minutes to complete.</p>
+  <button onclick="startExperiment()">Begin</button>
+
+  <script>
+    function startExperiment() {
+      // Randomize order for PANAS and STAIS
+      const order = Math.random() < 0.5 ? "PANAS_first" : "STAIS_first";
+      localStorage.setItem("SurveyOrder", JSON.stringify(order));
+      window.location.href = "pre_information.html";
+    }
+  </script>
+</body>
+</html>
