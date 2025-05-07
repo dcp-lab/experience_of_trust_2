@@ -13,7 +13,30 @@
 <body>
   <h2>Your Task</h2>
   <div class="instruction-box">
-    [TG text not found]
+    "<b>Game Instructions</b><br>"
+"You are going to participate in a game interacting with other participants. "
+"This game consists of ten trials. In each trial, you will be paired with a new participant, and both of you will be given 12 monetary units. "
+"You will be randomly assigned to the role of either Player A or Player B. <br><br>"
+
+"<b>Player A role</b><br>"
+"If you are randomly assigned to the role of Player A, you may choose to send any number of your 12 monetary units to Player B. You will get access to the answers given by each Player B's answers from the Short Schwartz Value Survey (SSVS). The amount you send will be tripled. "
+"Player B will then decide how much of the total amount to send back to you, including the option to send nothing.<br><br>"
+
+"<b>Player B role</b><br>"
+"If you are randomly assigned to the role of Player B, you will receive an amount between 0 and 12 from Player A. Player A will previously get access to your answers from the Short Schwartz Value Survey (SSVS). Each amount will be tripled before you receive it. "
+"You will then decide how much of this amount, if any, to send back to player A.<br><br>"
+
+"<b>Bonus</b><br>"
+"Both you and the other participant will be paid the cumulative amount you hold at the end of the ten trials. Each monetary unit is worth £0.002.<br>"
+"For example, the maximum amount of monetary unit that can be held at the end of a trial by one player is 12 * 3 + 12 = 48 MU. So, after ten trials, "
+"the maximum bonus received could reach 48 MU * 10 Rounds * £0.002 = £0.96.<br><br>"
+
+"<b>Task</b><br>"
+"Before playing, you will be asked to estimate how much of the 12 monetary units you expect to give (if assigned to Player A) or to receive (if assigned to Player B) on average per trial.<br><br>"
+)
+
+def get_condition(self):
+return self.selected_condition
   </div>
   <button onclick="window.location.href='estimate.html'">Continue</button>
 </body>
