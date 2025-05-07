@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Survey...</title>
+  <script>
+    window.onload = function () {
+      const order = JSON.parse(localStorage.getItem("SurveyOrder")) || "PANAS_first";
+      if (order === "PANAS_first") {
+        if (!localStorage.getItem("PANAS_pre")) {
+          window.location.href = "panas.html";
+        } else {
+          window.location.href = "stais.html";
+        }
+      } else {
+        if (!localStorage.getItem("STAIS_pre")) {
+          window.location.href = "stais.html";
+        } else {
+          window.location.href = "panas.html";
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Loading the first survey...</p>
+</body>
+</html>
