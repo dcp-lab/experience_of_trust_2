@@ -10,7 +10,7 @@
   </style>
 </head>
 <body>
-  <h2>Dictator Game – Trial <span id="trialNum">1</span>/3</h2>
+  <h2>Dictator Game – Trial <span id="trialNum">1</span>/10</h2>
   <p>You have been given <strong>100 points</strong>. You may give any portion to another participant.</p>
   <p>How many points do you want to give?</p>
 
@@ -22,6 +22,7 @@
 
   <script>
     const trialKey = "DictatorGameTrials";
+    const maxTrials = 10;
     const trialNum = parseInt(localStorage.getItem("DG_trial") || "1");
     document.getElementById("trialNum").textContent = trialNum;
 
@@ -38,7 +39,7 @@
       trials.push(result);
       localStorage.setItem(trialKey, JSON.stringify(trials));
 
-      if (trialNum < 3) {
+      if (trialNum < maxTrials) {
         localStorage.setItem("DG_trial", (trialNum + 1).toString());
         window.location.href = "waiting.html";
       } else {
