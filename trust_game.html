@@ -1,53 +1,224 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trust Game</title>
+  <title></title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    input[type="number"] { width: 60px; font-size: 16px; padding: 5px; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #fff;
+      line-height: 1.6;
+    }
+    .role-box {
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-left: 6px solid #3498db;
+      margin-bottom: 30px;
+    }
+    .row-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .coin-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+    .coin {
+      width: 30px;
+      height: 30px;
+      background-color: #f1c40f;
+      border-radius: 50%;
+      margin: 2px;
+    }
+    .coin.faded {
+      background-color: #e0e0e0;
+    }
+    .summary-text {
+      font-size: 18px;
+      margin-left: 15px;
+      font-weight: bold;
+    }
+    .input-box {
+      margin: 30px 0 10px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 120px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2ecc71;
+    }
+    .waiting-screen {
+      display: none;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
-  <h2>Trust Game</h2>
-  <p>You are Player A and have been given <strong>10 points</strong>. You can send any portion of it to Player B.</p>
-  <p>Whatever you send will be tripled. Player B will then decide how much to return to you.</p>
-  <form id="trustForm">
-    <label>How many points do you want to send? (0–10)</label><br>
-    <input type="number" id="sent" name="sent" min="0" max="10" required><br><br>
-    <label>How many points do you think Player B will return?</label><br>
-    <input type="number" id="returned" name="returned" min="0" required><br><br>
-    <button type="submit">Submit</button>
-  </form>
 
-  <script>
-    document.getElementById("trustForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const sent = parseInt(document.getElementById("sent").value, 10);
-      const returned = parseInt(document.getElementById("returned").value, 10);
+<div class="role-box">
+  <p>You are <strong>Player B</strong> in this game.</p>
+  <p>Player A has received 12 coins and has chosen to send you a certain number of them.</p>
+  <p>The amount Player A sent has been <strong>tripled</strong> before reaching you.</p>
+</div>
 
-      if (isNaN(sent) || sent < 0 || sent > 10) {
-        alert("Sent points must be between 0 and 10.");
-        return;
-      }
+<div class="coin-display">
+  <div class="row-label">Amount sent by Player A:</div>
+  <div class="coin-row" id="amountSentRow"></div>
 
-      const tripled = sent * 3;
+  <div class="row-label">Amount tripled:</div>
+  <div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div>
 
-      if (isNaN(returned) || returned < 0 || returned > tripled) {
-        alert("Returned points must be between 0 and " + tripled + ".");
-        return;
-      }
+  <div class="row-label">Your initial endowment:</div>
+  <div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div>
 
-      const results = {
-        sent: sent,
-        tripled: tripled,
-        returned: returned
-      };
+  <div class="row-label">Total amount in your hand:</div>
+  <div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
+</div>
 
-      localStorage.setItem("TrustGame", JSON.stringify(results));
-      window.location.href = "waiting.html";
-    });
-  </script>
+<div class="input-box">
+  <label for="sendBack">How many coins do you want to send back to Player A?</label><br>
+  <input type="number" id="sendBack" min="0" max="36" />
+</div>
+
+<button onclick="submitDecision()">Continue</button>
+
+<div class="waiting-screen" id="waitingScreen">
+  Please wait while the next round is prepared...
+</div>
+
+
+<script>
+  const amountSent = 9;
+  const tripledAmount = amountSent * 3;
+  const initialEndowment = 12;
+  const totalInHand = tripledAmount + initialEndowment;
+
+  function drawSentRow(containerId, count, max = 12) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    for (let i = 0; i < max; i++) {
+      const coin = document.createElement("div");
+      coin.classList.add("coin");
+      if (i >= count) coin.classList.add("faded");
+      container.appendChild(coin);
+    }
+    const summary = document.createElement("span");
+    summary.className = "summary-text";
+    summary.innerText = `→ ${count}/${max}`;
+    container.appendChild(summary);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    drawSentRow("amountSentRow", amountSent);
+    document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
+    document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
+    document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
+    document.getElementById("sendBack").max = totalInHand;
+  });
+
+  function submitDecision() {
+    const val = parseInt(document.getElementById("sendBack").value);
+    if (isNaN(val) || val < 0 || val > totalInHand) {
+      alert("Please enter a valid number between 0 and " + totalInHand);
+      return;
+    }
+
+    console.log("Coins returned:", val);
+
+    let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
+    trial += 1;
+    localStorage.setItem("TrustTrial", trial);
+
+    let nextPage;
+    if (trial >= 10) {
+      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    } else {
+      nextPage = "trust_game.html";
+    }
+    localStorage.setItem("nextPage", nextPage);
+
+    window.location.href = "waiting.html";
+  }
+</script>
+
+
+
+
+<script>
+  const amountSent = 9;
+  const tripledAmount = amountSent * 3;
+  const initialEndowment = 12;
+  const totalInHand = tripledAmount + initialEndowment;
+
+  function drawSentRow(containerId, count, max = 12) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    for (let i = 0; i < max; i++) {
+      const coin = document.createElement("div");
+      coin.classList.add("coin");
+      if (i >= count) coin.classList.add("faded");
+      container.appendChild(coin);
+    }
+    const summary = document.createElement("span");
+    summary.className = "summary-text";
+    summary.innerText = `→ ${count}/${max}`;
+    container.appendChild(summary);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    drawSentRow("amountSentRow", amountSent);
+    document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
+    document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
+    document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
+    document.getElementById("sendBack").max = totalInHand;
+  });
+
+  function submitDecision() {
+    const val = parseInt(document.getElementById("sendBack").value);
+    if (isNaN(val) || val < 0 || val > totalInHand) {
+      alert("Please enter a valid number between 0 and " + totalInHand);
+      return;
+    }
+
+    console.log("Coins returned:", val);
+
+    let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
+    trial += 1;
+    localStorage.setItem("TrustTrial", trial);
+
+    let nextPage;
+    if (trial >= 10) {
+      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    } else {
+      nextPage = "trust_game.html";
+    }
+    localStorage.setItem("nextPage", nextPage);
+
+    window.location.href = "waiting.html";
+  }
+</script>
+
 </body>
+
 </html>

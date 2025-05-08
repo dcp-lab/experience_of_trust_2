@@ -1,40 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dictator Game</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    input[type="number"] { width: 60px; font-size: 16px; padding: 5px; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
-  </style>
+<head> <meta charset="UTF-8"> <title></title> <style> body { font-family: Arial, sans-serif; padding: 40px; max-width: 1000px; margin: auto; background-color: #fff; line-height: 1.6; } .role-box { padding: 20px; background-color: #f2f2f2; border-left: 6px solid #3498db; margin-bottom: 30px; } .row-label { font-weight: bold; margin-bottom: 5px; } .coin-row { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 25px; } .coin { width: 30px; height: 30px; background-color: #f1c40f; border-radius: 50%; margin: 2px; } .coin.faded { background-color: #e0e0e0; } .summary-text { font-size: 18px; margin-left: 15px; font-weight: bold; } .input-box { margin: 30px 0 10px; } input[type="number"] { padding: 10px; font-size: 16px; width: 120px; } button { padding: 12px 24px; font-size: 16px; background-color: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; } button:hover { background-color: #2ecc71; } .waiting-screen { display: none; text-align: center; font-weight: bold; margin-top: 40px; } </style>
 </head>
-<body>
-  <h2>Dictator Game</h2>
-  <p>You have been given <strong>100 points</strong>. You may give any portion of them to another participant.</p>
-  <p>How many points do you want to give?</p>
-  <form id="dictatorForm">
-    <input type="number" name="given" min="0" max="100" required> / 100
-    <br><br>
-    <button type="submit">Submit</button>
-  </form>
-
-  <script>
-    document.getElementById("dictatorForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      const value = parseInt(form.get("given"), 10);
-      if (isNaN(value) || value < 0 || value > 100) {
-        alert("Please enter a value between 0 and 100.");
-        return;
-      }
-      const results = {
-        given: value,
-        kept: 100 - value
-      };
-      localStorage.setItem("DictatorGame", JSON.stringify(results));
-      window.location.href = "waiting.html";
-    });
-  </script>
-</body>
-</html>
+<body> <div class="role-box"> <p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you. </p>
+</div> <div class="coin-display"> <div class="row-label">Amount sent by Player A:</div> <div class="coin-row" id="amountSentRow"></div> <div class="row-label">Amount tripled:</div> <div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div> <div class="row-label">Your initial endowment:</div> <div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div> <div class="row-label">Total amount in your hand:</div> <div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
+</div> <button onclick="submitDecision()">Continue</button> <div class="waiting-screen" id="waitingScreen"> Please wait while the next round is prepared...
+</div> <script> const amountSent = 9; const tripledAmount = 0; const initialEndowment = 12; const totalInHand = amountSent + initialEndowment; function drawSentRow(containerId, count, max = 12) { const container = document.getElementById(containerId); container.innerHTML = ""; for (let i = 0; i < max; i++) { const coin = document.createElement("div"); coin.classList.add("coin"); if (i >= count) coin.classList.add("faded"); container.appendChild(coin); } const summary = document.createElement("span"); summary.className = "summary-text"; summary.innerText = `→ ${count}/${max}`; container.appendChild(summary); } document.addEventListener("DOMContentLoaded", () => { drawSentRow("amountSentRow", amountSent); document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`; document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`; document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`; document.getElementById("sendBack").max = totalInHand; }); function submitDecision() { console.log("Continuing to next phase..."); let trial = parseInt(localStorage.getItem("TrustTrial") || "0"); trial += 1; localStorage.setItem("TrustTrial", trial); let nextPage; if (trial >= 10) { const order = JSON.parse(localStorage.getItem("SurveyOrder")); nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html"; } else { nextPage = "trust_game.html"; } localStorage.setItem("nextPage", nextPage); window.location.href = "waiting.html"; }
+</script> <script> const amountSent = 9; const tripledAmount = 0; const initialEndowment = 12; const totalInHand = amountSent + initialEndowment; function drawSentRow(containerId, count, max = 12) { const container = document.getElementById(containerId); container.innerHTML = ""; for (let i = 0; i < max; i++) { const coin = document.createElement("div"); coin.classList.add("coin"); if (i >= count) coin.classList.add("faded"); container.appendChild(coin); } const summary = document.createElement("span"); summary.className = "summary-text"; summary.innerText = `→ ${count}/${max}`; container.appendChild(summary); } document.addEventListener("DOMContentLoaded", () => { drawSentRow("amountSentRow", amountSent); document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`; document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`; document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`; document.getElementById("sendBack").max = totalInHand; }); function submitDecision() { console.log("Continuing to next phase..."); let trial = parseInt(localStorage.getItem("TrustTrial") || "0"); trial += 1; localStorage.setItem("TrustTrial", trial); let nextPage; if (trial >= 10) { const order = JSON.parse(localStorage.getItem("SurveyOrder")); nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html"; } else { nextPage = "trust_game.html"; } localStorage.setItem("nextPage", nextPage); window.location.href = "waiting.html"; }
+</script> </body> </html>
