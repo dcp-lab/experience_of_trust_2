@@ -6,6 +6,73 @@
 <body> <div class="role-box"> <p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you. </p>
 </div> <div class="coin-display"> <div class="row-label">Amount sent by Player A:</div> <div class="coin-row" id="amountSentRow"></div> <div class="row-label">Amount tripled:</div> <div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div> <div class="row-label">Your initial endowment:</div> <div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div> <div class="row-label">Total amount in your hand:</div> <div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
 </div> <button onclick="submitDecision()">Continue</button> <div class="waiting-screen" id="waitingScreen"> Please wait while the next round is prepared...
-</div> <script> const amountSent = 9; const tripledAmount = 0; const initialEndowment = 12; const totalInHand = amountSent + initialEndowment; function drawSentRow(containerId, count, max = 12) { const container = document.getElementById(containerId); container.innerHTML = ""; for (let i = 0; i < max; i++) { const coin = document.createElement("div"); coin.classList.add("coin"); if (i >= count) coin.classList.add("faded"); container.appendChild(coin); } const summary = document.createElement("span"); summary.className = "summary-text"; summary.innerText = `→ ${count}/${max}`; container.appendChild(summary); } document.addEventListener("DOMContentLoaded", () => { drawSentRow("amountSentRow", amountSent); document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`; document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`; document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`; document.getElementById("sendBack").max = totalInHand; }); function submitDecision() { console.log("Continuing to next phase..."); let trial = parseInt(localStorage.getItem("TrustTrial") || "0"); trial += 1; localStorage.setItem("TrustTrial", trial); let nextPage; if (trial >= 10) { const order = JSON.parse(localStorage.getItem("SurveyOrder")); nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html"; } else { nextPage = "trust_game.html"; } localStorage.setItem("nextPage", nextPage); window.location.href = "waiting.html"; }
-</script> <script> const amountSent = 9; const tripledAmount = 0; const initialEndowment = 12; const totalInHand = amountSent + initialEndowment; function drawSentRow(containerId, count, max = 12) { const container = document.getElementById(containerId); container.innerHTML = ""; for (let i = 0; i < max; i++) { const coin = document.createElement("div"); coin.classList.add("coin"); if (i >= count) coin.classList.add("faded"); container.appendChild(coin); } const summary = document.createElement("span"); summary.className = "summary-text"; summary.innerText = `→ ${count}/${max}`; container.appendChild(summary); } document.addEventListener("DOMContentLoaded", () => { drawSentRow("amountSentRow", amountSent); document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`; document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`; document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`; document.getElementById("sendBack").max = totalInHand; }); function submitDecision() { console.log("Continuing to next phase..."); let trial = parseInt(localStorage.getItem("TrustTrial") || "0"); trial += 1; localStorage.setItem("TrustTrial", trial); let nextPage; if (trial >= 10) { const order = JSON.parse(localStorage.getItem("SurveyOrder")); nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html"; } else { nextPage = "trust_game.html"; } localStorage.setItem("nextPage", nextPage); window.location.href = "waiting.html"; }
+</div> 
+<script>
+  const amountSent = 7;
+  const tripledAmount = 0;
+  const initialEndowment = 12;
+  const totalInHand = amountSent + initialEndowment;
+
+  function drawSentRow(containerId, count, max = 12) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    for (let i = 0; i < max; i++) {
+      const coin = document.createElement("div");
+      coin.classList.add("coin");
+      if (i >= count) coin.classList.add("faded");
+      container.appendChild(coin);
+    }
+    const summary = document.createElement("span");
+    summary.className = "summary-text";
+    summary.innerText = `→ ${count}/${max}`;
+    container.appendChild(summary);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    drawSentRow("amountSentRow", amountSent);
+    document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
+    document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
+    document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
+    document.getElementById("sendBack").max = totalInHand;
+  });
+
+  function submitDecision() {
+    console.log("Continue to next trial or end...");
+
+    let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
+    trial += 1;
+    localStorage.setItem("DictatorTrial", trial);
+
+    let nextPage;
+    if (trial >= 10) {
+      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    } else {
+      nextPage = "dictator_game.html";
+    }
+    localStorage.setItem("nextPage", nextPage);
+
+    window.location.href = "waiting.html";
+  }
+</script>
+ <script> const amountSent = 9; const tripledAmount = 0; const initialEndowment = 12; const totalInHand = amountSent + initialEndowment; function drawSentRow(containerId, count, max = 12) { const container = document.getElementById(containerId); container.innerHTML = ""; for (let i = 0; i < max; i++) { const coin = document.createElement("div"); coin.classList.add("coin"); if (i >= count) coin.classList.add("faded"); container.appendChild(coin); } const summary = document.createElement("span"); summary.className = "summary-text"; summary.innerText = `→ ${count}/${max}`; container.appendChild(summary); } document.addEventListener("DOMContentLoaded", () => { drawSentRow("amountSentRow", amountSent); document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`; document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`; document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`; document.getElementById("sendBack").max = totalInHand; }); 
+function submitDecision() {
+  console.log("Continue to next trial or end...");
+
+  let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
+  trial += 1;
+  localStorage.setItem("DictatorTrial", trial);
+
+  let nextPage;
+  if (trial >= 10) {
+    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+  } else {
+    nextPage = "dictator_game.html";
+  }
+  localStorage.setItem("nextPage", nextPage);
+
+  window.location.href = "waiting.html";
+}
+ else { nextPage = "trust_game.html"; } localStorage.setItem("nextPage", nextPage); window.location.href = "waiting.html"; }
 </script> </body> </html>
