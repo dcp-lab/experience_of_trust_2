@@ -78,7 +78,10 @@
         }
       } else {
         if (order === "PANAS_first") {
-          window.location.href = "stais.html";
+          
+const task = JSON.parse(localStorage.getItem("Condition"))?.task;
+window.location.href = order === "PANAS_first" ? "stais.html" : (task === "TG" ? "your_task_tg.html" : "your_task_dg.html");
+
         } else {
           window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
         }

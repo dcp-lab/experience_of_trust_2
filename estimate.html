@@ -44,9 +44,15 @@
 
       const condition = JSON.parse(localStorage.getItem("Condition"))?.task;
       if (condition === "DG") {
-        window.location.href = "dictator_game.html";
+        
+const task = JSON.parse(localStorage.getItem("Condition"))?.task;
+window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
+
       } else {
-        window.location.href = "trust_game.html";
+        
+const task = JSON.parse(localStorage.getItem("Condition"))?.task;
+window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
+
       }
     }
   </script>

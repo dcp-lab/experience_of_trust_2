@@ -56,7 +56,10 @@
       localStorage.setItem("STAIS", JSON.stringify(responses));
       const order = JSON.parse(localStorage.getItem("SurveyOrder"));
       if (order === "STAIS_first") {
-        window.location.href = "panas.html";
+        
+const task = JSON.parse(localStorage.getItem("Condition"))?.task;
+window.location.href = order === "STAIS_first" ? "panas.html" : (task === "TG" ? "your_task_tg.html" : "your_task_dg.html");
+
       } else {
         window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
       }
