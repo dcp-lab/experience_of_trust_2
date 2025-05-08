@@ -43,12 +43,72 @@
 <div class='question'><label>19. Active</label><br><label class="option"><input type="radio" name="Active" value="1" required> Very slightly or not at all</label> <label class="option"><input type="radio" name="Active" value="2" required> A little</label> <label class="option"><input type="radio" name="Active" value="3" required> Moderately</label> <label class="option"><input type="radio" name="Active" value="4" required> Quite a bit</label> <label class="option"><input type="radio" name="Active" value="5" required> Extremely</label> </div>
 <div class='question'><label>20. Afraid</label><br><label class="option"><input type="radio" name="Afraid" value="1" required> Very slightly or not at all</label> <label class="option"><input type="radio" name="Afraid" value="2" required> A little</label> <label class="option"><input type="radio" name="Afraid" value="3" required> Moderately</label> <label class="option"><input type="radio" name="Afraid" value="4" required> Quite a bit</label> <label class="option"><input type="radio" name="Afraid" value="5" required> Extremely</label> </div>
 
-    <button type="submit">Next</button>
+    
   </form>
   
 <button onclick="handleContinue()">Continue</button>
+
+<script>
+  document.getElementById("panasForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    const data = {};
+    let complete = true;
+    const items = ['Interested', 'Distressed', 'Excited', 'Upset', 'Strong', 'Guilty', 'Scared', 'Hostile',
+                   'Enthusiastic', 'Proud', 'Irritable', 'Alert', 'Ashamed', 'Inspired', 'Nervous',
+                   'Determined', 'Attentive', 'Jittery', 'Active', 'Afraid'];
+    
+    document.querySelectorAll('.question').forEach(q => q.style.border = 'none');
+
+    items.forEach((item, idx) => {
+      const val = form.get(item);
+      if (!val) {
+        complete = false;
+        document.querySelectorAll('.question')[idx].style.border = "2px solid red";
+      }
+      data[item] = val;
+    });
+
+    if (!complete) {
+      alert("Please complete all items.");
+      return;
+    }
+
+    const isPost = window.location.pathname.includes("post");
+    localStorage.setItem(isPost ? "PANAS_post" : "PANAS_pre", JSON.stringify(data));
+
+    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    if (isPost) {
+      if (order === "PANAS_first") {
+        window.location.href = "stais_post.html";
+      } else {
+        window.location.href = "debrief.html";
+      }
+    }
+  });
+</script>
+
+
+
+
 <script>
   function handleContinue() {
+    const unanswered = [];
+    document.querySelectorAll(".question").forEach((q, idx) => {
+      const checked = q.querySelector("input[type='radio']:checked");
+      if (!checked) {
+        unanswered.push(idx + 1);
+        q.style.border = "2px solid red";
+      } else {
+        q.style.border = "none";
+      }
+    });
+
+    if (unanswered.length > 0) {
+      alert("Please answer all questions. Missing: " + unanswered.join(", "));
+      return;
+    }
+
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
     if (order === "PANAS_first" && window.location.href.includes("panas_post.html")) {
       window.location.href = "stais_post.html";
@@ -59,7 +119,6 @@
     }
   }
 </script>
-
 
 </body>
 </html>

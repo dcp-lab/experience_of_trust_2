@@ -43,12 +43,61 @@
 <div class='question'><label>19. I feel joyful</label><br><label class="option"><input type="radio" name="I feel joyful" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel joyful" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel joyful" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel joyful" value="4" required> Very much so</label> </div>
 <div class='question'><label>20. I feel fine</label><br><label class="option"><input type="radio" name="I feel fine" value="1" required> Not at all</label> <label class="option"><input type="radio" name="I feel fine" value="2" required> Somewhat</label> <label class="option"><input type="radio" name="I feel fine" value="3" required> Moderately so</label> <label class="option"><input type="radio" name="I feel fine" value="4" required> Very much so</label> </div>
 
-    <button type="submit">Next</button>
+    
   </form>
   
 <button onclick="handleContinue()">Continue</button>
+
+
+
+<script>
+  document.getElementById("staisForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    let complete = true;
+    const responses = {};
+    for (let i = 0; i < 10; i++) {
+      const val = form.get("q" + i);
+      if (!val) complete = false;
+      responses["q" + i] = val;
+    }
+    if (!complete) {
+      alert("Please answer all questions before continuing.");
+      return;
+    }
+    localStorage.setItem("STAIS_post", JSON.stringify(responses));
+    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    if (order === "STAIS_first") {
+      window.location.href = "panas_post.html";
+    } else {
+      window.location.href = "debrief.html";
+    }
+  });
+</script>
+
+
+
+
+
+
 <script>
   function handleContinue() {
+    const unanswered = [];
+    document.querySelectorAll(".question").forEach((q, idx) => {
+      const checked = q.querySelector("input[type='radio']:checked");
+      if (!checked) {
+        unanswered.push(idx + 1);
+        q.style.border = "2px solid red";
+      } else {
+        q.style.border = "none";
+      }
+    });
+
+    if (unanswered.length > 0) {
+      alert("Please answer all questions. Missing: " + unanswered.join(", "));
+      return;
+    }
+
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
     if (order === "PANAS_first" && window.location.href.includes("panas_post.html")) {
       window.location.href = "stais_post.html";
@@ -59,7 +108,6 @@
     }
   }
 </script>
-
 
 </body>
 </html>
