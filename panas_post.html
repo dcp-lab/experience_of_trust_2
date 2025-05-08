@@ -62,12 +62,16 @@
 
     items.forEach((item, idx) => {
       const val = form.get(item);
-      if (!val) complete = false;
-        data[item] = val;
+      if (!val) {
+        complete = false;
+        document.querySelectorAll('.question')[idx].style.border = "2px solid red";
       }
-      if (!complete) {
-        alert("Please complete all items.");
-        return;
+      data[item] = val;
+    });
+
+    if (!complete) {
+      alert("Please complete all items.");
+      return;
     }
 
     const isPost = window.location.pathname.includes("post");
