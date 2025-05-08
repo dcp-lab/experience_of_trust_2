@@ -38,30 +38,36 @@
     <button type="submit">Continue</button>
   </form>
 
-  <script>
-    document.getElementById("staisForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      let complete = true;
-      const responses = {};
-      for (let i = 0; i < 10; i++) {
-        const val = form.get("q" + i);
-        if (!val) complete = false;
-        responses["q" + i] = val;
-      }
-      if (!complete) {
-        alert("Please answer all questions before continuing.");
-        return;
-      }
+  
+<script>
+  document.getElementById("staisForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    let complete = true;
+    const responses = {};
+    for (let i = 0; i < 10; i++) {
+      const val = form.get("q" + i);
+      if (!val) complete = false;
+      responses["q" + i] = val;
+    }
+    if (!complete) {
+      alert("Please answer all questions before continuing.");
+      return;
+    }
+
     localStorage.setItem("STAIS_post", JSON.stringify(responses));
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+
     if (order === "STAIS_first") {
+      // This is the first post-survey → go to PANAS next
       window.location.href = "panas_post.html";
     } else {
+      // STAIS was second → done
       window.location.href = "debrief.html";
     }
   });
 </script>
+
 
 
 

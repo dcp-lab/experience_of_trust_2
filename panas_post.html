@@ -52,32 +52,39 @@
 </button>
 </form>
 
-  <script>
-    document.getElementById("panasForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      const data = {};
-      let complete = true;
-      for (let item of ['Interested', 'Distressed', 'Excited', 'Upset', 'Strong', 'Guilty', 'Scared', 'Hostile', 'Enthusiastic', 'Proud', 'Irritable', 'Alert', 'Ashamed', 'Inspired', 'Nervous', 'Determined', 'Attentive', 'Jittery', 'Active', 'Afraid']) {
-        const val = form.get(item);
-        if (!val) complete = false;
-        data[item] = val;
-      }
-      if (!complete) {
-        alert("Please complete all items.");
-        return;
-      }
+  
+<script>
+  document.getElementById("panasForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    const data = {};
+    let complete = true;
+    for (let item of ['Interested', 'Distressed', 'Excited', 'Upset', 'Strong', 'Guilty', 'Scared', 'Hostile',
+                      'Enthusiastic', 'Proud', 'Irritable', 'Alert', 'Ashamed', 'Inspired', 'Nervous',
+                      'Determined', 'Attentive', 'Jittery', 'Active', 'Afraid']) {
+      const val = form.get(item);
+      if (!val) complete = false;
+      data[item] = val;
+    }
+    if (!complete) {
+      alert("Please complete all items.");
+      return;
+    }
 
+    localStorage.setItem("PANAS_post", JSON.stringify(data));
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    if (order === "PANAS_first" && window.location.href.includes("panas_post.html")) {
+    const current = window.location.pathname;
+
+    if (order === "PANAS_first") {
+      // This is the first post-survey → go to STAIS next
       window.location.href = "stais_post.html";
-    } else if (order === "STAIS_first" && window.location.href.includes("stais_post.html")) {
-      window.location.href = "panas_post.html";
     } else {
+      // PANAS was second → done
       window.location.href = "debrief.html";
     }
-  }
+  });
 </script>
+
 
 </body>
 </html>
