@@ -107,7 +107,8 @@
 
 
 <script>
-if (!localStorage.getItem("TrustTrial")) localStorage.setItem("TrustTrial", "0");
+  if (!localStorage.getItem("TrustTrial")) localStorage.setItem("TrustTrial", "0");
+
   const amountSent = 9;
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
@@ -156,66 +157,8 @@ if (!localStorage.getItem("TrustTrial")) localStorage.setItem("TrustTrial", "0")
     } else {
       nextPage = "trust_game.html";
     }
+
     localStorage.setItem("nextPage", nextPage);
-
-    window.location.href = "waiting.html";
-  }
-</script>
-
-
-
-
-<script>
-  const amountSent = 9;
-  const tripledAmount = amountSent * 3;
-  const initialEndowment = 12;
-  const totalInHand = tripledAmount + initialEndowment;
-
-  function drawSentRow(containerId, count, max = 12) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-    for (let i = 0; i < max; i++) {
-      const coin = document.createElement("div");
-      coin.classList.add("coin");
-      if (i >= count) coin.classList.add("faded");
-      container.appendChild(coin);
-    }
-    const summary = document.createElement("span");
-    summary.className = "summary-text";
-    summary.innerText = `→ ${count}/${max}`;
-    container.appendChild(summary);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    drawSentRow("amountSentRow", amountSent);
-    document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
-    document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
-    document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
-    document.getElementById("sendBack").max = totalInHand;
-  });
-
-  function submitDecision() {
-    const val = parseInt(document.getElementById("sendBack").value);
-    if (isNaN(val) || val < 0 || val > totalInHand) {
-      alert("Please enter a valid number between 0 and " + totalInHand);
-      return;
-    }
-
-    console.log("Coins returned:", val);
-
-    let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
-    trial += 1;
-    localStorage.setItem("TrustTrial", trial);
-
-    let nextPage;
-    if (trial >= 10) {
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
-    } else {
-      nextPage = "trust_game.html";
-    }
-    localStorage.setItem("nextPage", nextPage);
-
     window.location.href = "waiting.html";
   }
 </script>
