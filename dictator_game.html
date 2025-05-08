@@ -8,6 +8,7 @@
 </div> <button onclick="submitDecision()">Continue</button> <div class="waiting-screen" id="waitingScreen"> Please wait while the next round is prepared...
 </div> 
 <script>
+if (!localStorage.getItem("DictatorTrial")) localStorage.setItem("DictatorTrial", "0");
   const amountSent = 7;
   const tripledAmount = 0;
   const initialEndowment = 12;

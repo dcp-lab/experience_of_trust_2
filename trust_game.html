@@ -107,6 +107,7 @@
 
 
 <script>
+if (!localStorage.getItem("TrustTrial")) localStorage.setItem("TrustTrial", "0");
   const amountSent = 9;
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
