@@ -75,39 +75,5 @@
   });
 </script>
 
-
-
-
-
-
-<script>
-  function handleContinue() {
-    const unanswered = [];
-    document.querySelectorAll(".question").forEach((q, idx) => {
-      const checked = q.querySelector("input[type='radio']:checked");
-      if (!checked) {
-        unanswered.push(idx + 1);
-        q.style.border = "2px solid red";
-      } else {
-        q.style.border = "none";
-      }
-    });
-
-    if (unanswered.length > 0) {
-      alert("Please answer all questions. Missing: " + unanswered.join(", "));
-      return;
-    }
-
-    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    if (order === "PANAS_first" && window.location.href.includes("panas_post.html")) {
-      window.location.href = "stais_post.html";
-    } else if (order === "STAIS_first" && window.location.href.includes("stais_post.html")) {
-      window.location.href = "panas_post.html";
-    } else {
-      window.location.href = "debrief.html";
-    }
-  }
-</script>
-
 </body>
 </html>
