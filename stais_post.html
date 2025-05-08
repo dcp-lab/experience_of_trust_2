@@ -45,47 +45,21 @@
 
     <button type="submit">Next</button>
   </form>
-  <script>
-    document.getElementById("surveyForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      const data = {};
-      let complete = true;
-      for (let item of ['I feel calm', 'I feel secure', 'I am tense', 'I am regretful', 'I feel at ease', 'I feel upset', 'I am currently worried<br>about possible misfortunes', 'I feel rested', 'I feel anxious', 'I feel comfortable', 'I feel self-confident', 'I feel joyous', 'I am jittery', "I feel 'high-strung'", 'I am relaxed', 'I feel content', 'I am worried', 'I feel overexcited and rattled', 'I feel joyful', 'I feel fine']) {
-        const val = form.get(item);
-        if (!val) complete = false;
-        data[item] = val;
-      }
-      if (!complete) {
-        alert("Please complete all items.");
-        return;
-      }
-      
+  
+<button onclick="handleContinue()">Continue</button>
+<script>
+  function handleContinue() {
     const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    localStorage.setItem("STAIS_post", JSON.stringify(data));
-    if (order === "STAIS_first") {
+    if (order === "PANAS_first" && window.location.href.includes("panas_post.html")) {
+      window.location.href = "stais_post.html";
+    } else if (order === "STAIS_first" && window.location.href.includes("stais_post.html")) {
       window.location.href = "panas_post.html";
     } else {
       window.location.href = "debrief.html";
     }
-
-    });
-  </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-    const delay = 500;
-
-    setTimeout(() => {
-      if (order === "STAIS_first") {
-        window.location.href = "panas_post.html";
-      } else {
-        window.location.href = "debrief.html";
-      }
-    }, delay);
-  });
+  }
 </script>
+
 
 </body>
 </html>
