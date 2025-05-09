@@ -95,6 +95,7 @@
     const combined = [...high, ...any].sort(() => Math.random() - 0.5);
     localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
     localStorage.setItem("DictatorTrial", "1");
+    window.location.reload();  // retry with clean data
   }
 
   // Initialize round and trial data
