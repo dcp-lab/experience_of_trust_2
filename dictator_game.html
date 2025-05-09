@@ -89,7 +89,7 @@
 
 <script>
   let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
-  const totalRounds = 10;
+  const totalRounds = trialValues.length;
   const roundResults = JSON.parse(localStorage.getItem("DictatorResults") || "[]");
 
   const trialValues = JSON.parse(localStorage.getItem("DictatorTrialValues"));
