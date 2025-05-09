@@ -89,13 +89,23 @@
 
 <script>
   // Generate trials if missing
-  if (!localStorage.getItem("DictatorTrialValues")) {
+  let trialInitRequired = false;
+
+if (!localStorage.getItem("DictatorTrialValues")) {
   const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8);
   const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));
   const combined = [...high, ...any].sort(() => Math.random() - 0.5);
+
   localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
   localStorage.setItem("DictatorTrial", "1");
-  }
+  trialInitRequired = true;
+}
+
+if (trialInitRequired) {
+  location.reload();  // delay loading trial values until next page load
+  throw new Error("Reloading after initializing trials.");
+}
+
 
   // Initialize data
   let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
