@@ -1,15 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head> <meta charset="UTF-8"> <title></title> <style> body { font-family: Arial, sans-serif; padding: 40px; max-width: 1000px; margin: auto; background-color: #fff; line-height: 1.6; } .role-box { padding: 20px; background-color: #f2f2f2; border-left: 6px solid #3498db; margin-bottom: 30px; } .row-label { font-weight: bold; margin-bottom: 5px; } .coin-row { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 25px; } .coin { width: 30px; height: 30px; background-color: #f1c40f; border-radius: 50%; margin: 2px; } .coin.faded { background-color: #e0e0e0; } .summary-text { font-size: 18px; margin-left: 15px; font-weight: bold; } .input-box { margin: 30px 0 10px; } input[type="number"] { padding: 10px; font-size: 16px; width: 120px; } button { padding: 12px 24px; font-size: 16px; background-color: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; } button:hover { background-color: #2ecc71; } .waiting-screen { display: none; text-align: center; font-weight: bold; margin-top: 40px; } </style>
+<head>
+  <meta charset="UTF-8">
+  <title>Dictator Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #fff;
+      line-height: 1.6;
+    }
+    .role-box {
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-left: 6px solid #3498db;
+      margin-bottom: 30px;
+    }
+    .coin-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+    .coin {
+      width: 30px;
+      height: 30px;
+      background-color: #f1c40f;
+      border-radius: 50%;
+      margin: 2px;
+    }
+    .coin.faded {
+      background-color: #e0e0e0;
+    }
+    .summary-text {
+      font-size: 18px;
+      margin-left: 15px;
+      font-weight: bold;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2ecc71;
+    }
+  </style>
 </head>
-<body> <div class="role-box"> <p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you. </p>
-</div> <div class="coin-display"> <div class="row-label">Amount sent by Player A:</div> <div class="coin-row" id="amountSentRow"></div> <div class="row-label">Amount tripled:</div> <div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div> <div class="row-label">Your initial endowment:</div> <div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div> <div class="row-label">Total amount in your hand:</div> <div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
-</div> <button onclick="submitDecision()">Continue</button> <div class="waiting-screen" id="waitingScreen"> Please wait while the next round is prepared...
-</div> 
+<body>
+
+<h3 id="roundHeader"></h3>
+
+<div id="waitingScreen" style="display: block; font-weight: bold; font-size: 20px; margin-bottom: 20px;">
+  Waiting for the decision of next Player A...
+</div>
+
+<div id="gameContent" style="display: none;">
+  <div class="role-box">
+    <p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you.</p>
+  </div>
+
+  <div class="coin-row">
+    <span class="summary-text">Amount sent by Player A:</span>
+    <div class="coin-row" id="amountSentRow"></div>
+  </div>
+  <div class="coin-row">
+    <span class="summary-text">Amount tripled:</span>
+    <span class="summary-text" id="tripledSummary"></span>
+  </div>
+  <div class="coin-row">
+    <span class="summary-text">Your initial endowment:</span>
+    <span class="summary-text" id="endowmentSummary"></span>
+  </div>
+  <div class="coin-row">
+    <span class="summary-text">Total amount in your hand:</span>
+    <span class="summary-text" id="totalSummary"></span>
+  </div>
+
+  <br>
+  <button onclick="submitDecision()">Continue</button>
+</div>
 
 <script>
-  if (!localStorage.getItem("DictatorTrial")) localStorage.setItem("DictatorTrial", "0");
+  let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
+  const totalRounds = 10;
+  const roundResults = JSON.parse(localStorage.getItem("DictatorResults") || "[]");
 
   const amountSent = 7;
   const tripledAmount = 0;
@@ -31,33 +112,43 @@
     container.appendChild(summary);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function updateGameContent() {
+    document.getElementById("roundHeader").textContent = `Round ${currentRound} of ${totalRounds}`;
     drawSentRow("amountSentRow", amountSent);
     document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
     document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
     document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
-  });
+  }
+
+  function showGameAfterDelay() {
+    document.getElementById("waitingScreen").style.display = "block";
+    document.getElementById("gameContent").style.display = "none";
+    setTimeout(() => {
+      updateGameContent();
+      document.getElementById("waitingScreen").style.display = "none";
+      document.getElementById("gameContent").style.display = "block";
+    }, 1500);
+  }
 
   function submitDecision() {
-    console.log("Received coins:", amountSent);
-
-    let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
-    trial += 1;
-    localStorage.setItem("DictatorTrial", trial);
-
-    let nextPage;
-    if (trial >= 10) {
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    roundResults.push({
+      round: currentRound,
+      amountSent,
+      totalInHand
+    });
+    currentRound++;
+    if (currentRound > totalRounds) {
+      localStorage.setItem("DictatorResults", JSON.stringify(roundResults));
+      localStorage.setItem("DictatorTrial", "1");
+      window.location.href = "next_page.html"; // Change as needed
     } else {
-      nextPage = "dictator_game.html";
+      localStorage.setItem("DictatorTrial", currentRound.toString());
+      location.reload();
     }
-
-    localStorage.setItem("nextPage", nextPage);
-    window.location.href = "waiting.html";
   }
-</script>
- 
-</body> 
 
+  document.addEventListener("DOMContentLoaded", showGameAfterDelay);
+</script>
+
+</body>
 </html>
