@@ -88,6 +88,9 @@
 </div>
 
 <script>
+  
+  let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
+
   // Generate trials if missing (e.g., participant jumped in directly)
   let trialDataMissing = false;
   
@@ -154,22 +157,35 @@
   }
 
   function showGameAfterDelay() {
-    document.getElementById("waitingScreen").style.display = "block";
+  if (trial < trialValues.length) {
+    document.getElementById("waitingScreen").style.display = "flex";
     document.getElementById("gameContent").style.display = "none";
+
     setTimeout(() => {
       updateGameContent();
       document.getElementById("waitingScreen").style.display = "none";
       document.getElementById("gameContent").style.display = "block";
-    }, 1500);
+    }, 3000);
+  } else {
+    // Skip waiting on final trial (you won't hit this unless logic is broken)
+    updateGameContent();
   }
+}
+
 
   function submitDecision() {
-    roundResults.push({
-      round: currentRound,
-      amountSent,
-      tripledAmount,
-      totalInHand
-    });
+  trial++;
+
+  if (trial >= trialValues.length) {
+    const order = localStorage.getItem("SurveyOrder");
+    const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    window.location.href = nextPage;
+  } else {
+    localStorage.setItem("TrustTrial", trial.toString());
+    location.reload();
+  }
+}
+;
 
     currentRound++;
 
