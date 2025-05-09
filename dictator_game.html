@@ -88,22 +88,29 @@
 </div>
 
 <script>
-  // Initialize current round index (1-based)
+  // Initialize current round (1-based index)
   let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
 
-  // Get trial values and selected amount
+  // Load and validate trial values
   const trialValues = JSON.parse(localStorage.getItem("DictatorTrialValues")) || [];
+  const totalRounds = trialValues.length;
+
+  if (!trialValues.length) {
+    alert("Error: No trial data found. Please restart the experiment.");
+    window.location.href = "index.html";
+  }
+
   const amountSent = trialValues[currentRound - 1];
 
-  // Validate loaded data
-  if (!trialValues.length || amountSent === undefined) {
-    alert("Error loading dictator trial data. Please restart the experiment.");
+  if (amountSent === undefined) {
+    alert("Error loading current round data. Please restart.");
     window.location.href = "index.html";
   }
 
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
   const totalInHand = tripledAmount + initialEndowment;
+
   const roundResults = JSON.parse(localStorage.getItem("DictatorResults") || "[]");
 
   function drawSentRow(containerId, count, max = 12) {
@@ -122,7 +129,7 @@
   }
 
   function updateGameContent() {
-    document.getElementById("roundHeader").textContent = `Round ${currentRound} of ${trialValues.length}`;
+    document.getElementById("roundHeader").textContent = `Round ${currentRound} of ${totalRounds}`;
     drawSentRow("amountSentRow", amountSent);
     document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
     document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
@@ -140,7 +147,6 @@
   }
 
   function submitDecision() {
-    // Record result
     roundResults.push({
       round: currentRound,
       amountSent,
@@ -150,10 +156,9 @@
 
     currentRound++;
 
-    if (currentRound > trialValues.length) {
-      // Save final results and redirect to post-questionnaire
+    if (currentRound > totalRounds) {
       localStorage.setItem("DictatorResults", JSON.stringify(roundResults));
-      localStorage.setItem("DictatorTrial", "1");  // reset for safety
+      localStorage.setItem("DictatorTrial", "1");  // Reset for future use
       const order = localStorage.getItem("SurveyOrder");
       const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
       window.location.href = nextPage;
@@ -166,6 +171,7 @@
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
 </script>
+
 
 </body>
 </html>
