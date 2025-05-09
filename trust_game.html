@@ -128,10 +128,12 @@
   const trialValues = JSON.parse(localStorage.getItem("TrustTrialValues"));
   const amountSent = trialValues ? trialValues[trial] : undefined;
 
-  if (!trialValues || amountSent === undefined) {
-    alert("Could not load trust trial data. Please restart the experiment.");
-    window.location.href = "index.html";
-  }
+  if (!trialValues || !trialValues.length) {
+  alert("Could not load trust trial data. Please restart the experiment.");
+  window.location.href = "index.html";
+}
+
+// Do NOT error if amountSent is undefined — the game might be complete!
 
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
@@ -178,8 +180,13 @@
 
 
   function submitDecision() {
-  trial++;
+  const value = document.getElementById("sendBack").value;
+  if (value === "") {
+    alert("Please enter the number of coins to send back.");
+    return;
+  }
 
+  trial++;
   if (trial >= trialValues.length) {
     const order = localStorage.getItem("SurveyOrder");
     const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
@@ -189,6 +196,7 @@
     location.reload();
   }
 }
+
 
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
