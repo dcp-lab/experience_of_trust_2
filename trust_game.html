@@ -112,12 +112,12 @@
 </div>
 
 <script>
-  const amountSent = 9;
+  let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
+  const trialValues = JSON.parse(localStorage.getItem("TrustTrialValues"));
+  const amountSent = trialValues[trial];
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
   const totalInHand = tripledAmount + initialEndowment;
-
-  let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
 
   function drawSentRow(containerId, count, max = 12) {
     const container = document.getElementById(containerId);

@@ -92,7 +92,8 @@
   const totalRounds = 10;
   const roundResults = JSON.parse(localStorage.getItem("DictatorResults") || "[]");
 
-  const amountSent = 4;
+  const trialValues = JSON.parse(localStorage.getItem("DictatorTrialValues"));
+  const amountSent = trialValues[currentRound - 1];
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
   const totalInHand = tripledAmount + initialEndowment;
@@ -141,7 +142,10 @@
     if (currentRound > totalRounds) {
       localStorage.setItem("DictatorResults", JSON.stringify(roundResults));
       localStorage.setItem("DictatorTrial", "1");
-      window.location.href = "next_page.html";
+      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+      localStorage.setItem("nextPage", nextPage);
+      window.location.href = "waiting.html";
     } else {
       localStorage.setItem("DictatorTrial", currentRound.toString());
       location.reload();
