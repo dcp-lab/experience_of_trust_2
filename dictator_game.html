@@ -88,13 +88,21 @@
 </div>
 
 <script>
-  // Initialize current round (1-based index)
-  let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
+  // Generate trials if missing (e.g., participant jumped in directly)
+  if (!localStorage.getItem("DictatorTrialValues")) {
+    const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8); // values 8–12
+    const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));    // values 0–12
+    const combined = [...high, ...any].sort(() => Math.random() - 0.5);
+    localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
+    localStorage.setItem("DictatorTrial", "1");
+  }
 
-  // Load and validate trial values
+  // Initialize round and trial data
+  let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
   const trialValues = JSON.parse(localStorage.getItem("DictatorTrialValues")) || [];
   const totalRounds = trialValues.length;
 
+  // Safety check for data
   if (!trialValues.length) {
     alert("Error: No trial data found. Please restart the experiment.");
     window.location.href = "index.html";
@@ -158,7 +166,7 @@
 
     if (currentRound > totalRounds) {
       localStorage.setItem("DictatorResults", JSON.stringify(roundResults));
-      localStorage.setItem("DictatorTrial", "1");  // Reset for future use
+      localStorage.setItem("DictatorTrial", "1");  // Reset
       const order = localStorage.getItem("SurveyOrder");
       const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
       window.location.href = nextPage;
@@ -171,7 +179,6 @@
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
 </script>
-
 
 </body>
 </html>
