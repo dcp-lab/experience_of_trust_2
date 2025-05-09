@@ -19,8 +19,8 @@
       // Set survey and game condition
       const condition = Math.random() < 0.5 ? "DG" : "TG";
       const order = Math.random() < 0.5 ? "PANAS_first" : "STAIS_first";
-      localStorage.setItem("Condition", JSON.stringify({ task: condition }));
-      localStorage.setItem("SurveyOrder", JSON.stringify(order));
+      localStorage.setItem("Condition", condition);
+      localStorage.setItem("SurveyOrder", order);
       window.location.href = "pre_information.html";
     }
   </script>
