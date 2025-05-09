@@ -144,8 +144,7 @@
       localStorage.setItem("DictatorTrial", "1");
       const order = localStorage.getItem("SurveyOrder");
       const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
-      localStorage.setItem("nextPage", nextPage);
-      window.location.href = "waiting.html";
+      window.location.href = nextPage;
     } else {
       localStorage.setItem("DictatorTrial", currentRound.toString());
       location.reload();
