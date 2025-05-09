@@ -142,7 +142,7 @@
     if (currentRound > totalRounds) {
       localStorage.setItem("DictatorResults", JSON.stringify(roundResults));
       localStorage.setItem("DictatorTrial", "1");
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      const order = localStorage.getItem("SurveyOrder");
       const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
       localStorage.setItem("nextPage", nextPage);
       window.location.href = "waiting.html";
