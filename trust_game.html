@@ -108,21 +108,30 @@
 </div>
 
 <script>
-  // Initialize current trial index
+  // Fallback: generate trials if not present
+  if (!localStorage.getItem("TrustTrialValues")) {
+    const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8); // 8–12
+    const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));    // 0–12
+    const combined = [...high, ...any].sort(() => Math.random() - 0.5);
+    localStorage.setItem("TrustTrialValues", JSON.stringify(combined));
+    localStorage.setItem("TrustTrial", "0");
+  }
+
+  // Initialize trial index
   let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
 
-  // Retrieve trial values
+  // Load trials
   const trialValues = JSON.parse(localStorage.getItem("TrustTrialValues"));
   const amountSent = trialValues ? trialValues[trial] : undefined;
-  const tripledAmount = amountSent * 3;
-  const initialEndowment = 12;
-  const totalInHand = tripledAmount + initialEndowment;
 
-  // Safety check
   if (!trialValues || amountSent === undefined) {
     alert("Could not load trust trial data. Please restart the experiment.");
     window.location.href = "index.html";
   }
+
+  const tripledAmount = amountSent * 3;
+  const initialEndowment = 12;
+  const totalInHand = tripledAmount + initialEndowment;
 
   function drawSentRow(containerId, count, max = 12) {
     const container = document.getElementById(containerId);
@@ -158,7 +167,6 @@
   }
 
   function submitDecision() {
-    // Save decision data (optional: add actual user input capture here)
     trial++;
     if (trial >= trialValues.length) {
       const order = localStorage.getItem("SurveyOrder");
