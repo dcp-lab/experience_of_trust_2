@@ -168,8 +168,7 @@
       nextPage = "trust_game.html";
     }
 
-    localStorage.setItem("nextPage", nextPage);
-    window.location.href = "waiting.html";
+    window.location.href = nextPage;
   }
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
