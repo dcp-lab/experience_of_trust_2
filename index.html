@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,27 +17,29 @@
 
   <script>
     function startExperiment() {
-      // Set survey and game condition
+      // Random assignment to condition and survey order
       const condition = Math.random() < 0.5 ? "DG" : "TG";
       const order = Math.random() < 0.5 ? "PANAS_first" : "STAIS_first";
-      localStorage.setItem("Condition", JSON.stringify({ task: condition }));
-      localStorage.setItem("SurveyOrder", JSON.stringify(order));
+
+      localStorage.setItem("Condition", condition);          // Store plain string
+      localStorage.setItem("SurveyOrder", order);            // Store plain string
+
       window.location.href = "pre_information.html";
     }
   </script>
 
-<script>
-  function generateTrials() {
-    const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8); // 8–12
-    const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));    // 0–12
-    const combined = [...high, ...any].sort(() => Math.random() - 0.5);
-    localStorage.setItem("TrustTrialValues", JSON.stringify(combined));
-    localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
-    localStorage.setItem("TrustTrial", "0");
-    localStorage.setItem("DictatorTrial", "1");
-  }
-  generateTrials();
-</script>
+  <script>
+    function generateTrials() {
+      const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8); // 8–12
+      const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));    // 0–12
+      const combined = [...high, ...any].sort(() => Math.random() - 0.5);
+      localStorage.setItem("TrustTrialValues", JSON.stringify(combined));
+      localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
+      localStorage.setItem("TrustTrial", "0");      // 0-based index
+      localStorage.setItem("DictatorTrial", "0");   // 0-based index
+    }
+    generateTrials();
+  </script>
 
 </body>
 </html>
