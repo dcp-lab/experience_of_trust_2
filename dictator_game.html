@@ -89,14 +89,22 @@
 
 <script>
   // Generate trials if missing (e.g., participant jumped in directly)
+  let trialDataMissing = false;
+  
   if (!localStorage.getItem("DictatorTrialValues")) {
-    const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8); // values 8–12
-    const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));    // values 0–12
+    const high = Array.from({ length: 6 }, () => Math.floor(Math.random() * 5) + 8);
+    const any = Array.from({ length: 4 }, () => Math.floor(Math.random() * 13));
     const combined = [...high, ...any].sort(() => Math.random() - 0.5);
     localStorage.setItem("DictatorTrialValues", JSON.stringify(combined));
     localStorage.setItem("DictatorTrial", "1");
-    window.location.reload();  // retry with clean data
+    trialDataMissing = true;
   }
+  
+  if (trialDataMissing) {
+    // Delay the reload to allow storage to complete
+    setTimeout(() => window.location.reload(), 100);
+  }
+
 
   // Initialize round and trial data
   let currentRound = parseInt(localStorage.getItem("DictatorTrial") || "1");
