@@ -108,12 +108,21 @@
 </div>
 
 <script>
+  // Initialize current trial index
   let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
+
+  // Retrieve trial values
   const trialValues = JSON.parse(localStorage.getItem("TrustTrialValues"));
-  const amountSent = trialValues[trial];
+  const amountSent = trialValues ? trialValues[trial] : undefined;
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
   const totalInHand = tripledAmount + initialEndowment;
+
+  // Safety check
+  if (!trialValues || amountSent === undefined) {
+    alert("Could not load trust trial data. Please restart the experiment.");
+    window.location.href = "index.html";
+  }
 
   function drawSentRow(containerId, count, max = 12) {
     const container = document.getElementById(containerId);
@@ -131,12 +140,11 @@
   }
 
   function updateGameContent() {
-    document.getElementById("roundHeader").textContent = `Round ${trial + 1} of 10`;
+    document.getElementById("roundHeader").textContent = `Round ${trial + 1} of ${trialValues.length}`;
     drawSentRow("amountSentRow", amountSent);
     document.getElementById("tripledSummary").textContent = `${tripledAmount} × 🟡`;
     document.getElementById("endowmentSummary").textContent = `${initialEndowment} × 🟡`;
     document.getElementById("totalSummary").textContent = `${totalInHand} × 🟡`;
-    document.getElementById("sendBack").max = totalInHand;
   }
 
   function showGameAfterDelay() {
@@ -150,29 +158,21 @@
   }
 
   function submitDecision() {
-    const val = parseInt(document.getElementById("sendBack").value);
-    if (isNaN(val) || val < 0 || val > totalInHand) {
-      alert("Please enter a valid number between 0 and " + totalInHand);
-      return;
-    }
-
-    console.log("Coins returned:", val);
-    trial += 1;
-    localStorage.setItem("TrustTrial", trial);
-
-    let nextPage;
-    if (trial >= 10) {
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-      nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+    // Save decision data (optional: add actual user input capture here)
+    trial++;
+    if (trial >= trialValues.length) {
+      const order = localStorage.getItem("SurveyOrder");
+      const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+      window.location.href = nextPage;
     } else {
-      nextPage = "trust_game.html";
+      localStorage.setItem("TrustTrial", trial.toString());
+      location.reload();
     }
-
-    window.location.href = nextPage;
   }
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
 </script>
+
 
 </body>
 </html>
