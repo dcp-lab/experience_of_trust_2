@@ -107,11 +107,22 @@
     window.location.href = "index.html";
   }
 
+  // Ensure trial values and valid round index
   const amountSent = trialValues[currentRound - 1];
-  if (amountSent === undefined) {
-    alert("Error loading current round.");
+  
+  if (
+    !trialValues.length ||
+    isNaN(currentRound) ||
+    currentRound < 1 ||
+    currentRound > trialValues.length ||
+    amountSent === undefined
+  ) {
+    alert("Trial data is corrupted or missing. Restarting...");
+    localStorage.removeItem("DictatorTrialValues");
+    localStorage.removeItem("DictatorTrial");
     window.location.href = "index.html";
   }
+
 
   const tripledAmount = amountSent * 3;
   const initialEndowment = 12;
