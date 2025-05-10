@@ -69,7 +69,9 @@
       }
       const isPost = window.location.pathname.includes("post");
       localStorage.setItem(isPost ? "PANAS_post" : "PANAS_pre", JSON.stringify(data));
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+      const order = localStorage.getItem("SurveyOrder");
+      const task = localStorage.getItem("Condition");
+      
       if (isPost) {
         if (order === "PANAS_first") {
           window.location.href = "stais_post.html";
@@ -78,15 +80,12 @@
         }
       } else {
         if (order === "PANAS_first") {
-          
-const task = JSON.parse(localStorage.getItem("Condition"))?.task;
-window.location.href = order === "PANAS_first" ? "stais.html" : (task === "TG" ? "your_task_tg.html" : "your_task_dg.html");
-
+          window.location.href = "stais.html";
         } else {
-          window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
+          window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
         }
       }
-    });
+
   </script>
 
 <script>
