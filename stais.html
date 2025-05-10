@@ -39,31 +39,30 @@
   </form>
 
   <script>
-    document.getElementById("staisForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      let complete = true;
-      const responses = {};
-      for (let i = 0; i < 10; i++) {
-        const val = form.get("q" + i);
-        if (!val) complete = false;
-        responses["q" + i] = val;
-      }
-      if (!complete) {
-        alert("Please answer all questions before continuing.");
-        return;
-      }
-      localStorage.setItem("STAIS", JSON.stringify(responses));
-      const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-      if (order === "STAIS_first") {
-        
-const task = JSON.parse(localStorage.getItem("Condition"))?.task;
-window.location.href = order === "STAIS_first" ? "panas.html" : (task === "TG" ? "your_task_tg.html" : "your_task_dg.html");
+  document.getElementById("staisForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const form = new FormData(this);
+  let complete = true;
+  const responses = {};
+  for (let i = 0; i < 10; i++) {
+    const val = form.get("q" + i);
+    if (!val) complete = false;
+    responses["q" + i] = val;
+  }
+  if (!complete) {
+    alert("Please answer all questions before continuing.");
+    return;
+  }
+  localStorage.setItem("STAIS", JSON.stringify(responses));
+  const order = localStorage.getItem("SurveyOrder");
+  const task = localStorage.getItem("Condition");
 
-      } else {
-        window.location.href = localStorage.getItem("Condition")?.includes('TG') ? "your_task_tg.html" : "your_task_dg.html";
-      }
-    });
+  if (order === "STAIS_first") {
+    window.location.href = "panas.html";
+  } else {
+    window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
+  }
+  });
   </script>
 
 <script>
