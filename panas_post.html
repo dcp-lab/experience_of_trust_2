@@ -72,7 +72,7 @@
     }
 
     localStorage.setItem("PANAS_post", JSON.stringify(data));
-    const order = JSON.parse(localStorage.getItem("SurveyOrder"));
+    const order = localStorage.getItem("SurveyOrder");
     const current = window.location.pathname;
 
     if (order === "PANAS_first") {
