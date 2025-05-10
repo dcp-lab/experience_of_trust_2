@@ -20,29 +20,19 @@
   <button onclick="submitEstimate()">Continue</button>
 
   <script>
-    function submitEstimate() {
-      const input = document.getElementById("estimateInput");
-      const value = parseFloat(input.value);
-      if (isNaN(value) || value < 0 || value > 12) {
-        alert("Please enter a valid number between 0 and 12.");
-        return;
-      }
+  function submitEstimate() {
+  const input = document.getElementById("estimateInput");
+  const value = parseFloat(input.value);
+  if (isNaN(value) || value < 0 || value > 12) {
+    alert("Please enter a valid number between 0 and 12.");
+    return;
+  }
 
-      localStorage.setItem("Estimate", JSON.stringify({ averageExpected: value }));
+  localStorage.setItem("Estimate", JSON.stringify({ averageExpected: value }));
 
-      const condition = JSON.parse(localStorage.getItem("Condition"))?.task;
-      if (condition === "DG") {
-        
-const task = JSON.parse(localStorage.getItem("Condition"))?.task;
-window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
-
-      } else {
-        
-const task = JSON.parse(localStorage.getItem("Condition"))?.task;
-window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
-
-      }
-    }
+  const task = localStorage.getItem("Condition");
+  window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
+  }
   </script>
 </body>
 </html>
