@@ -39,45 +39,12 @@
 
         window.onload = displayTrialInfo;
     </script>
-
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 40px;
-    line-height: 1.6;
-  }
-  button {
-    background-color: #003366;
-    color: white;
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #0055a5;
-  }
-  input, select, textarea {
-    font-size: 16px;
-    padding: 8px;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-</style>
-
 </head>
 <body>
-    <div class="container">
+    <div class="content" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
         <h2>Practice Trial: Trust Game</h2>
         <p>Player A sends you: <strong id="sentValue"></strong> units.</p>
-        <form onsubmit="checkAnswers(event)">
+        <form onsubmit="checkAnswers(event)" style="display: flex; flex-direction: column; gap: 10px;">
             <label>Tripled Amount:</label><br>
             <input type="number" id="tripled" required><br>
             <label>Your Initial Endowment:</label><br>
