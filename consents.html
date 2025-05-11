@@ -45,7 +45,7 @@
       I confirm that I have read and understood the consent form above and voluntarily agree to participate.
     </label>
 <br/><br/>
-<button type="submit">Continue</button><button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+<button type="submit">Continue</button><button id="exitButton" onclick="confirmExit()" style="margin-top: 20px; margin-left: 20px;">Exit Experiment</button>
 </form>
 <script>
     document.getElementById("consentForm").addEventListener("submit", function(e) {
@@ -54,7 +54,6 @@
       window.location.href = "explanation.html";
     });
   </script>
-
 
 
 <script>
