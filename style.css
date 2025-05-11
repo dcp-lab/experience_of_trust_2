@@ -16,3 +16,16 @@ button {
   padding: 10px 20px;
   font-size: 16px;
 }
+
+#exitButton {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#exitButton:hover {
+    background-color: #c0392b;
+}
