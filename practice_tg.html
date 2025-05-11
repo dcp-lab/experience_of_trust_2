@@ -41,10 +41,10 @@
     </script>
 </head>
 <body>
-    <div class="content">
+    <div class="content" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
         <h2>Practice Trial: Trust Game</h2>
         <p>Player A sends you: <strong id="sentValue"></strong> units.</p>
-        <form onsubmit="checkAnswers(event)">
+        <form onsubmit="checkAnswers(event)" style="display: flex; flex-direction: column; gap: 10px;">
             <label>Tripled Amount:</label><br>
             <input type="number" id="tripled" required><br>
             <label>Your Initial Endowment:</label><br>
