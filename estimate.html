@@ -1,75 +1,37 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Expectation</title>
+  <title>Information Sheet</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 40px;
-    }
-    .container {
-      background-color: #fff;
-      max-width: 600px;
-      margin: auto;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #003366;
-    }
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background-color: #003366;
-      color: white;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0055a5;
-    }
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; line-height: 1.6; }
+    h2, h3 { color: #003366; }
+    button { margin-top: 40px; padding: 12px 24px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Expectation</h2>
-    <p><b>You have been assigned to a <u>Player B</u> role.</b></p>
-    <p>In each round, a new participant (Player A) will choose how much to send you from their initial endowment of 12 units.</p>
-    <p><b>Based on this, how much of Player A's 12 monetary units do you expect to receive on average per trial?</b></p>
+  <h2>Expectation</h2>
+  <p><b>You have been assigned to a <u>Player B</u> role.</b></p>
+  <p>In each round, a new participant (Player A) will choose how much to send you from their initial endowment of 12 units.</p>
+  <p><b>Based on this, how much of Player A's 12 monetary units do you expect to receive on average per trial?</b></p>
 
-    <input type="number" id="estimateInput" placeholder="Enter your estimate between 0 and 12 (e.g., 8)" min="0" max="12" step="1" required>
+  <input type="number" id="estimateInput" placeholder="Enter your estimate between 0 and 12 (e.g., 8)" min="0" max="12" step="1" required>
 
-    <button onclick="submitEstimate()">Continue</button>
-  </div>
+  <button onclick="submitEstimate()">Continue</button>
 
   <script>
   function submitEstimate() {
-    const input = document.getElementById("estimateInput");
-    const value = parseFloat(input.value);
-    if (isNaN(value) || value < 0 || value > 12) {
-      alert("Please enter a valid number between 0 and 12.");
-      return;
-    }
+  const input = document.getElementById("estimateInput");
+  const value = parseFloat(input.value);
+  if (isNaN(value) || value < 0 || value > 12) {
+    alert("Please enter a valid number between 0 and 12.");
+    return;
+  }
 
-    localStorage.setItem("Estimate", JSON.stringify({ averageExpected: value }));
+  localStorage.setItem("Estimate", JSON.stringify({ averageExpected: value }));
 
-    const task = localStorage.getItem("Condition");
-    window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
+  const task = localStorage.getItem("Condition");
+  window.location.href = task === "TG" ? "trust_game.html" : "dictator_game.html";
   }
   </script>
 </body>
