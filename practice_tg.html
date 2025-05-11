@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
+
 <html>
 <head>
-    <title>Practice - Trust Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script>
+<title>Practice - Trust Game</title>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<script>
         let practiceSent = Math.floor(Math.random() * 13);  // Random 0 to 12
         let tripled = practiceSent * 3;
         let endowment = 12;
@@ -41,23 +42,36 @@
     </script>
 </head>
 <body>
-    <div class="content" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-        <h2>Practice Trial: Trust Game</h2>
-        <p>This is a practice trial. Please fill the empty boxes correctly before being able to pursue the experiment.</p>
-        
-        <p></p>Player A sends you: <strong id="sentValue"></strong> units.</p>
-        <form onsubmit="checkAnswers(event)" style="display: flex; flex-direction: column; gap: 10px;">
-            <label>Tripled Amount:</label><br>
-            <input type="number" id="tripled" required><br>
-            <label>Your Initial Endowment:</label><br>
-            <input type="number" id="endowment" required><br>
-            <label>Total Available:</label><br>
-            <input type="number" id="total" required><br>
-            <label>Amount You Want to Send Back:</label><br>
-            <input type="number" id="sendback" required><br><br>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="feedback"></div>
-    </div>
+<div class="content" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+<h2>Practice Trial: Trust Game</h2>
+<p>This is a practice trial. Please fill the empty boxes correctly before being able to pursue the experiment.</p>
+<p></p>Player A sends you: <strong id="sentValue"></strong> units.
+<form onsubmit="checkAnswers(event)" style="display: flex; flex-direction: column; gap: 10px;">
+<label>Tripled Amount:</label><br/>
+<input id="tripled" required="" type="number"/><br/>
+<label>Your Initial Endowment:</label><br/>
+<input id="endowment" required="" type="number"/><br/>
+<label>Total Available:</label><br/>
+<input id="total" required="" type="number"/><br/>
+<label>Amount You Want to Send Back:</label><br/>
+<input id="sendback" required="" type="number"/><br/><br/>
+<button type="submit">Submit</button><button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+</form>
+<div id="feedback"></div>
+</div>
+<button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+<script>
+function confirmExit() {
+    const confirmed = confirm("Are you sure you want to exit the experiment? Your data will be deleted.");
+    if (confirmed) {
+        localStorage.clear();
+        sessionStorage.clear();
+        document.cookie.split(";").forEach(function(c) {
+            document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        });
+        window.location.href = "index.html";
+    }
+}
+</script>
 </body>
 </html>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Trust Game</title>
-  <style>
+<meta charset="utf-8"/>
+<title>Trust Game</title>
+<style>
     body {
       font-family: Arial, sans-serif;
       padding: 40px;
@@ -75,42 +76,32 @@
   </style>
 </head>
 <body>
-
 <h3 id="roundHeader"></h3>
-
 <div id="waitingScreen" style="display: flex; justify-content: center; align-items: center; height: 100vh; font-weight: bold; font-size: 20px; text-align: center;">
   Please wait while the Player A is making its decision...
 </div>
-
 <div id="gameContent" style="display: none;">
-  <div class="role-box">
-    <p>You are <strong>Player B</strong> in this game.</p>
-    <p>Player A has received 12 coins and has chosen to send you a certain number of them.</p>
-    <p>The amount Player A sent has been <strong>tripled</strong> before reaching you.</p>
-  </div>
-
-  <div class="coin-display">
-    <div class="row-label">Amount sent by Player A:</div>
-    <div class="coin-row" id="amountSentRow"></div>
-
-    <div class="row-label">Amount tripled:</div>
-    <div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div>
-
-    <div class="row-label">Your initial endowment:</div>
-    <div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div>
-
-    <div class="row-label">Total amount in your hand:</div>
-    <div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
-  </div>
-
-  <div class="input-box">
-    <label for="sendBack">How many coins do you want to send back to Player A?</label><br>
-    <input type="number" id="sendBack" min="0" max="36" />
-  </div>
-
-  <button onclick="submitDecision()">Continue</button>
+<div class="role-box">
+<p>You are <strong>Player B</strong> in this game.</p>
+<p>Player A has received 12 coins and has chosen to send you a certain number of them.</p>
+<p>The amount Player A sent has been <strong>tripled</strong> before reaching you.</p>
 </div>
-
+<div class="coin-display">
+<div class="row-label">Amount sent by Player A:</div>
+<div class="coin-row" id="amountSentRow"></div>
+<div class="row-label">Amount tripled:</div>
+<div class="coin-row"><span class="summary-text" id="tripledSummary"></span></div>
+<div class="row-label">Your initial endowment:</div>
+<div class="coin-row"><span class="summary-text" id="endowmentSummary"></span></div>
+<div class="row-label">Total amount in your hand:</div>
+<div class="coin-row"><span class="summary-text" id="totalSummary"></span></div>
+</div>
+<div class="input-box">
+<label for="sendBack">How many coins do you want to send back to Player A?</label><br/>
+<input id="sendBack" max="36" min="0" type="number"/>
+</div>
+<button onclick="submitDecision()">Continue</button><button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+</div>
 <script>
   // Initialize trial index
   let trial = parseInt(localStorage.getItem("TrustTrial") || "0");
@@ -201,7 +192,19 @@
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
 </script>
-
-
+<button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+<script>
+function confirmExit() {
+    const confirmed = confirm("Are you sure you want to exit the experiment? Your data will be deleted.");
+    if (confirmed) {
+        localStorage.clear();
+        sessionStorage.clear();
+        document.cookie.split(";").forEach(function(c) {
+            document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        });
+        window.location.href = "index.html";
+    }
+}
+</script>
 </body>
 </html>

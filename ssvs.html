@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SSVS Survey</title>
-  <style>
+<meta charset="utf-8"/>
+<title>SSVS Survey</title>
+<style>
     body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; }
     label { font-weight: bold; }
     .question { margin-bottom: 20px; }
@@ -18,34 +19,29 @@
   </style>
 </head>
 <body>
-  <h2>SSVS Survey</h2>
-  
+<h2>SSVS Survey</h2>
 <div class="scale-title">
-  <b>Instructions:</b><br>
+<b>Instructions:</b><br/>
   Please rate the importance of the following values as a life-guiding principle for you.
-  Use the 7-point scale below:<br>
-  -1: Opposed to my principles<br>
-  0: Not important<br>
-  3: Important<br>
+  Use the 7-point scale below:<br/>
+  -1: Opposed to my principles<br/>
+  0: Not important<br/>
+  3: Important<br/>
   5: Of supreme importance
 </div>
-
-  <form id="ssvsForm">
-    <div class='question'><label>1. Equality</label><br><label class="option"><input type="radio" name="Equality" value="-1" required> -1</label> <label class="option"><input type="radio" name="Equality" value="0" required> 0</label> <label class="option"><input type="radio" name="Equality" value="1" required> 1</label> <label class="option"><input type="radio" name="Equality" value="2" required> 2</label> <label class="option"><input type="radio" name="Equality" value="3" required> 3</label> <label class="option"><input type="radio" name="Equality" value="4" required> 4</label> <label class="option"><input type="radio" name="Equality" value="5" required> 5</label> </div>
-<div class='question'><label>2. Inner Harmony</label><br><label class="option"><input type="radio" name="Inner Harmony" value="-1" required> -1</label> <label class="option"><input type="radio" name="Inner Harmony" value="0" required> 0</label> <label class="option"><input type="radio" name="Inner Harmony" value="1" required> 1</label> <label class="option"><input type="radio" name="Inner Harmony" value="2" required> 2</label> <label class="option"><input type="radio" name="Inner Harmony" value="3" required> 3</label> <label class="option"><input type="radio" name="Inner Harmony" value="4" required> 4</label> <label class="option"><input type="radio" name="Inner Harmony" value="5" required> 5</label> </div>
-<div class='question'><label>3. Social Power</label><br><label class="option"><input type="radio" name="Social Power" value="-1" required> -1</label> <label class="option"><input type="radio" name="Social Power" value="0" required> 0</label> <label class="option"><input type="radio" name="Social Power" value="1" required> 1</label> <label class="option"><input type="radio" name="Social Power" value="2" required> 2</label> <label class="option"><input type="radio" name="Social Power" value="3" required> 3</label> <label class="option"><input type="radio" name="Social Power" value="4" required> 4</label> <label class="option"><input type="radio" name="Social Power" value="5" required> 5</label> </div>
-<div class='question'><label>4. Pleasure</label><br><label class="option"><input type="radio" name="Pleasure" value="-1" required> -1</label> <label class="option"><input type="radio" name="Pleasure" value="0" required> 0</label> <label class="option"><input type="radio" name="Pleasure" value="1" required> 1</label> <label class="option"><input type="radio" name="Pleasure" value="2" required> 2</label> <label class="option"><input type="radio" name="Pleasure" value="3" required> 3</label> <label class="option"><input type="radio" name="Pleasure" value="4" required> 4</label> <label class="option"><input type="radio" name="Pleasure" value="5" required> 5</label> </div>
-<div class='question'><label>5. Freedom</label><br><label class="option"><input type="radio" name="Freedom" value="-1" required> -1</label> <label class="option"><input type="radio" name="Freedom" value="0" required> 0</label> <label class="option"><input type="radio" name="Freedom" value="1" required> 1</label> <label class="option"><input type="radio" name="Freedom" value="2" required> 2</label> <label class="option"><input type="radio" name="Freedom" value="3" required> 3</label> <label class="option"><input type="radio" name="Freedom" value="4" required> 4</label> <label class="option"><input type="radio" name="Freedom" value="5" required> 5</label> </div>
-<div class='question'><label>6. A Spiritual Life</label><br><label class="option"><input type="radio" name="A Spiritual Life" value="-1" required> -1</label> <label class="option"><input type="radio" name="A Spiritual Life" value="0" required> 0</label> <label class="option"><input type="radio" name="A Spiritual Life" value="1" required> 1</label> <label class="option"><input type="radio" name="A Spiritual Life" value="2" required> 2</label> <label class="option"><input type="radio" name="A Spiritual Life" value="3" required> 3</label> <label class="option"><input type="radio" name="A Spiritual Life" value="4" required> 4</label> <label class="option"><input type="radio" name="A Spiritual Life" value="5" required> 5</label> </div>
-<div class='question'><label>7. Meaning in Life</label><br><label class="option"><input type="radio" name="Meaning in Life" value="-1" required> -1</label> <label class="option"><input type="radio" name="Meaning in Life" value="0" required> 0</label> <label class="option"><input type="radio" name="Meaning in Life" value="1" required> 1</label> <label class="option"><input type="radio" name="Meaning in Life" value="2" required> 2</label> <label class="option"><input type="radio" name="Meaning in Life" value="3" required> 3</label> <label class="option"><input type="radio" name="Meaning in Life" value="4" required> 4</label> <label class="option"><input type="radio" name="Meaning in Life" value="5" required> 5</label> </div>
-<div class='question'><label>8. National Security</label><br><label class="option"><input type="radio" name="National Security" value="-1" required> -1</label> <label class="option"><input type="radio" name="National Security" value="0" required> 0</label> <label class="option"><input type="radio" name="National Security" value="1" required> 1</label> <label class="option"><input type="radio" name="National Security" value="2" required> 2</label> <label class="option"><input type="radio" name="National Security" value="3" required> 3</label> <label class="option"><input type="radio" name="National Security" value="4" required> 4</label> <label class="option"><input type="radio" name="National Security" value="5" required> 5</label> </div>
-<div class='question'><label>9. Self-Respect</label><br><label class="option"><input type="radio" name="Self-Respect" value="-1" required> -1</label> <label class="option"><input type="radio" name="Self-Respect" value="0" required> 0</label> <label class="option"><input type="radio" name="Self-Respect" value="1" required> 1</label> <label class="option"><input type="radio" name="Self-Respect" value="2" required> 2</label> <label class="option"><input type="radio" name="Self-Respect" value="3" required> 3</label> <label class="option"><input type="radio" name="Self-Respect" value="4" required> 4</label> <label class="option"><input type="radio" name="Self-Respect" value="5" required> 5</label> </div>
-<div class='question'><label>10. True Friendship</label><br><label class="option"><input type="radio" name="True Friendship" value="-1" required> -1</label> <label class="option"><input type="radio" name="True Friendship" value="0" required> 0</label> <label class="option"><input type="radio" name="True Friendship" value="1" required> 1</label> <label class="option"><input type="radio" name="True Friendship" value="2" required> 2</label> <label class="option"><input type="radio" name="True Friendship" value="3" required> 3</label> <label class="option"><input type="radio" name="True Friendship" value="4" required> 4</label> <label class="option"><input type="radio" name="True Friendship" value="5" required> 5</label> </div>
-
-    
-  </form>
-
-  <script>
+<form id="ssvsForm">
+<div class="question"><label>1. Equality</label><br/><label class="option"><input name="Equality" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Equality" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Equality" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Equality" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Equality" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Equality" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Equality" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>2. Inner Harmony</label><br/><label class="option"><input name="Inner Harmony" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Inner Harmony" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>3. Social Power</label><br/><label class="option"><input name="Social Power" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Social Power" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Social Power" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Social Power" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Social Power" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Social Power" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Social Power" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>4. Pleasure</label><br/><label class="option"><input name="Pleasure" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Pleasure" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Pleasure" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Pleasure" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Pleasure" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Pleasure" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Pleasure" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>5. Freedom</label><br/><label class="option"><input name="Freedom" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Freedom" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Freedom" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Freedom" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Freedom" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Freedom" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Freedom" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>6. A Spiritual Life</label><br/><label class="option"><input name="A Spiritual Life" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="A Spiritual Life" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>7. Meaning in Life</label><br/><label class="option"><input name="Meaning in Life" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Meaning in Life" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>8. National Security</label><br/><label class="option"><input name="National Security" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="National Security" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="National Security" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="National Security" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="National Security" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="National Security" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="National Security" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>9. Self-Respect</label><br/><label class="option"><input name="Self-Respect" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="Self-Respect" required="" type="radio" value="5"/> 5</label> </div>
+<div class="question"><label>10. True Friendship</label><br/><label class="option"><input name="True Friendship" required="" type="radio" value="-1"/> -1</label> <label class="option"><input name="True Friendship" required="" type="radio" value="0"/> 0</label> <label class="option"><input name="True Friendship" required="" type="radio" value="1"/> 1</label> <label class="option"><input name="True Friendship" required="" type="radio" value="2"/> 2</label> <label class="option"><input name="True Friendship" required="" type="radio" value="3"/> 3</label> <label class="option"><input name="True Friendship" required="" type="radio" value="4"/> 4</label> <label class="option"><input name="True Friendship" required="" type="radio" value="5"/> 5</label> </div>
+</form>
+<script>
     document.getElementById("ssvsForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const form = new FormData(this);
@@ -69,7 +65,6 @@
       }
     });
   </script>
-
 <script>
   document.getElementById("ssvsForm").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -102,9 +97,7 @@
     window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
   });
 </script>
-
-<button onclick="document.getElementById('ssvsForm').dispatchEvent(new Event('submit', { cancelable: true }))">Continue</button>
-
+<button onclick="document.getElementById('ssvsForm').dispatchEvent(new Event('submit', { cancelable: true }))">Continue</button><button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const inputs = document.querySelectorAll("input[type='radio'], input[type='range'], select");
@@ -134,6 +127,19 @@
     });
   });
 </script>
-  
+<button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+<script>
+function confirmExit() {
+    const confirmed = confirm("Are you sure you want to exit the experiment? Your data will be deleted.");
+    if (confirmed) {
+        localStorage.clear();
+        sessionStorage.clear();
+        document.cookie.split(";").forEach(function(c) {
+            document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        });
+        window.location.href = "index.html";
+    }
+}
+</script>
 </body>
 </html>

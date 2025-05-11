@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dictator Game</title>
-  <style>
+<meta charset="utf-8"/>
+<title>Dictator Game</title>
+<style>
     body { font-family: Arial, sans-serif; padding: 40px; max-width: 1000px; margin: auto; background-color: #fff; line-height: 1.6; }
     .role-box { padding: 20px; background-color: #f2f2f2; border-left: 6px solid #3498db; margin-bottom: 30px; }
     .coin-row { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 25px; }
@@ -16,39 +17,33 @@
   </style>
 </head>
 <body>
-
 <h3 id="roundHeader"></h3>
-
 <div id="waitingScreen" style="display: flex; justify-content: center; align-items: center; height: 200px; font-weight: bold; font-size: 20px; text-align: center;">
   Waiting for the decision of next Player A...
 </div>
-
 <div id="gameContent" style="display: none;">
-  <div class="role-box">
-    <p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you. That amount has been tripled before reaching you.</p>
-  </div>
-
-  <div class="coin-row">
-    <span class="summary-text">Amount sent by Player A:</span>
-    <div class="coin-row" id="amountSentRow"></div>
-  </div>
-  <div class="coin-row">
-    <span class="summary-text">Amount tripled:</span>
-    <span class="summary-text" id="tripledSummary"></span>
-  </div>
-  <div class="coin-row">
-    <span class="summary-text">Your initial endowment:</span>
-    <span class="summary-text" id="endowmentSummary"></span>
-  </div>
-  <div class="coin-row">
-    <span class="summary-text">Total amount in your hand:</span>
-    <span class="summary-text" id="totalSummary"></span>
-  </div>
-
-  <br>
-  <button onclick="submitDecision()">Continue</button>
+<div class="role-box">
+<p>You are <strong>Player B</strong> in this game. Player A has received 12 coins and has decided how many coins to give you. That amount has been tripled before reaching you.</p>
 </div>
-
+<div class="coin-row">
+<span class="summary-text">Amount sent by Player A:</span>
+<div class="coin-row" id="amountSentRow"></div>
+</div>
+<div class="coin-row">
+<span class="summary-text">Amount tripled:</span>
+<span class="summary-text" id="tripledSummary"></span>
+</div>
+<div class="coin-row">
+<span class="summary-text">Your initial endowment:</span>
+<span class="summary-text" id="endowmentSummary"></span>
+</div>
+<div class="coin-row">
+<span class="summary-text">Total amount in your hand:</span>
+<span class="summary-text" id="totalSummary"></span>
+</div>
+<br/>
+<button onclick="submitDecision()">Continue</button><button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+</div>
 <script>
   // Use 0-based trial index like in Trust Game
   let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
@@ -133,6 +128,19 @@
 
   document.addEventListener("DOMContentLoaded", showGameAfterDelay);
 </script>
-
+<button id="exitButton" onclick="confirmExit()">Exit Experiment</button>
+<script>
+function confirmExit() {
+    const confirmed = confirm("Are you sure you want to exit the experiment? Your data will be deleted.");
+    if (confirmed) {
+        localStorage.clear();
+        sessionStorage.clear();
+        document.cookie.split(";").forEach(function(c) {
+            document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        });
+        window.location.href = "index.html";
+    }
+}
+</script>
 </body>
 </html>
