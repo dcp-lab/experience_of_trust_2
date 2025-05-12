@@ -32,7 +32,7 @@
 </div>
 <script>
     setTimeout(() => {
-      const next = localStorage.getItem("nextPage") || "index.html";
+      const next = sessionStorage.getItem("nextPage") || "index.html";
       window.location.href = next;
     }, 3000);
   </script>
