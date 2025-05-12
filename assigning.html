@@ -31,11 +31,13 @@
 <p>Waiting for the decision of the next Player A...</p>
 </div>
 <script>
-    setTimeout(() => {
-      const next = sessionStorage.getItem("nextPage") || "index.html";
-      window.location.href = next;
-    }, 3000);
-  </script>
+  setTimeout(() => {
+    const condition = localStorage.getItem("Condition");
+    const nextPage = condition === "TG" ? "practice_tg.html" : "practice_dg.html";
+    window.location.href = nextPage;
+  }, 3000);
+</script>
+
 
 
 <button id="exitButton" onclick="confirmExit()" style="margin-top: 20px; margin-left: 20px;">Exit Experiment</button>
