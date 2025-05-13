@@ -173,16 +173,16 @@
 
   function submitDecision() {
   const value = parseInt(document.getElementById("sendBack").value, 10);
-    if (isNaN(value)) {
-      alert("Please enter the number of coins to send back.");
-      return;
-    }
-    if (value > totalInHand) {
-      alert(`You cannot send back more than ${totalInHand} coins.`);
-      return;
-    }
+  if (isNaN(value)) {
+    alert("Please enter the number of coins to send back.");
+    return;
+  }
+  if (value > totalInHand) {
+    alert(`You cannot send back more than ${totalInHand} coins.`);
+    return;
   }
 
+  // Update trial count and navigate
   trial++;
   if (trial >= trialValues.length) {
     const order = localStorage.getItem("SurveyOrder");
@@ -193,6 +193,7 @@
     location.reload();
   }
 }
+
 
 
 
