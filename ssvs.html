@@ -74,8 +74,8 @@ document.getElementById("ssvsForm").addEventListener("submit", function(e) {
   // ✅ Set end time before redirect
   window.responseTimes.ssvsEnd = Date.now();
 
-  const order = JSON.parse(localStorage.getItem("SurveyOrder"));
-  window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
+  const order = localStorage.getItem("SurveyOrder");
+window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
 });
 </script>
 
