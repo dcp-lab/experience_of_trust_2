@@ -12,16 +12,22 @@
 </head>
 <body>
 <h2>Instructions</h2>
-<p><b>Surveys</b><br/>
-<b>You will first complete three surveys</b>: the Short Schwartz Value Survey (SSVS), 
-     the Positive and Negative Affect Schedule (PANAS), and the State-Trait Anxiety Inventory for Adults (STAI-S). 
-     These surveys will help us understand your values, current emotional state, and anxiety levels.<br/><br/>
-<b>Game Instructions</b><br/>
-<b>After completing the surveys, you will participate in a game with other online participants.</b> The rules of the game will be explained to you after the completion of the surveys.<br/><br/>
-     At the end of the experiment, <b>you will be asked to complete the PANAS and STAI-S surveys again.</b>
+<p><b><u>Surveys</u></b><br/>
+<b>You will first complete three surveys</b>: These surveys will help us to understand your values, current emotional and anxiety states.<br/><br/>
+<b><u>Game Instructions</u></b><br/>
+<b>After completing the surveys, you will participate in a game with online participants.</b><br/>
+    <b>At each new trial, a new participant will be playing with you. Each new participant will get access the survey on values you have completed.</b><br/>
+    The rules of the game will be explained to you after the completion of the surveys.<br/>
+    At the end of the experiment, <b>you will be asked to complete the two surveys on your current emotional and anxiety states you answered earlier.</b>
 </p>
-<button onclick="window.location.href='ssvs.html'">Continue</button><button id="exitButton" onclick="confirmExit()" style="margin-top: 20px; margin-left: 20px;">Exit Experiment</button>
-
+<div style="display: flex; justify-content: space-between; max-width: 600px; margin-top: 30px;">
+  <button onclick="window.location.href='ssvs.html'" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px;">
+    Continue
+  </button>
+  <button onclick="confirmExit()" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 4px;">
+    Exit Experiment
+  </button>
+</div>
 
 <script>
 function confirmExit() {

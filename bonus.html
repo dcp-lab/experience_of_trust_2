@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Bonus</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; line-height: 1.6; }
+    h2 { color: #003366; }
+    button { margin-top: 40px; padding: 12px 24px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>Your Bonus</h2>
+  <p id="bonusSummary">Calculating your bonus...</p>
+  <button onclick="window.location.href='debrief.html'"
+        style="background-color: #28a745; color: white; padding: 12px 24px; font-size: 16px; border: none; border-radius: 4px;">
+  Continue
+</button>
+
+
+<script>
+window.onload = function () {
+  const received = JSON.parse(localStorage.getItem("received") || "[]");
+  const sentBack = JSON.parse(localStorage.getItem("sentBack") || "[]");
+  const initialEndowment = 12;
+
+  console.log("Received (tripled):", received);
+  console.log("Sent Back:", sentBack);
+
+  const keptPerTrial = received.map((tripled, i) => {
+    const total = tripled + initialEndowment;
+    const returned = sentBack[i] || 0;
+    const kept = total - returned;
+    console.log(`Trial ${i + 1}: received=${tripled}, total=${total}, returned=${returned}, kept=${kept}`);
+    return kept;
+  });
+
+  const totalAfterPlaying = keptPerTrial.reduce((sum, val) => sum + val, 0);
+  const bonus = (totalAfterPlaying * 0.002).toFixed(2);
+
+  const text = `After 10 trials, you accumulated <strong>${totalAfterPlaying}</strong> monetary units. As a reminder a monetary unit is worth £0.002.<br>
+                This corresponds to a bonus of <strong>${bonus} £</strong> that will be paid to you.`;
+
+  console.log("Kept per trial:", keptPerTrial);
+  console.log("Final Total After Playing:", totalAfterPlaying);
+  console.log("Bonus (£):", bonus);
+
+  document.getElementById("bonusSummary").innerHTML = text;
+};
+</script>
+
+</body>
+</html>
