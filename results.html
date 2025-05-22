@@ -125,7 +125,13 @@
       if (staisPostDuration) {
       rows.push(`Timing,staisPostDurationMs,${staisPostDuration}`);
       }
-  
+      const dictatorDurations = JSON.parse(localStorage.getItem("dictatorDurations") || "[]");
+      if (dictatorDurations.length > 0) {
+        dictatorDurations.forEach((duration, i) => {
+          rows.push(`Timing,DictatorTrial${i + 1}DurationMs,${duration}`);
+        });
+      }
+ 
     // --- Download CSV ---
     const csvContent = "data:text/csv;charset=utf-8," + rows.join("\n");
     const encodedUri = encodeURI(csvContent);
