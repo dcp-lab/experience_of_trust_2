@@ -19,6 +19,10 @@
   </style>
 </head>
 <body>
+<script>
+  window.responseTimes = window.responseTimes || {};
+  window.responseTimes.ssvsStart = Date.now();
+</script>
 <h2>Survey</h2>
 <div class="scale-title">
 <b>Instructions:</b><br/>
@@ -55,9 +59,12 @@
       }
       localStorage.setItem("SSVS", JSON.stringify(data));
       const order = localStorage.getItem("SurveyOrder");
+      
       if (order === "PANAS_first") {
+        window.responseTimes.ssvsEnd = Date.now();
         window.location.href = "panas.html";
       } else {
+        window.responseTimes.ssvsEnd = Date.now();
         window.location.href = "stais.html";
       }
     });
