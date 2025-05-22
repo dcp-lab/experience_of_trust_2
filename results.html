@@ -113,6 +113,10 @@
       if (panasDuration) {
       rows.push(`Timing,panasDurationMs,${panasDuration}`);
       }
+      const staisDuration = localStorage.getItem("staisDuration");
+      if (staisDuration) {
+      rows.push(`Timing,staisDurationMs,${staisDuration}`);
+      }
 
   
     // --- Download CSV ---
