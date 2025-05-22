@@ -105,9 +105,11 @@
     });
 
     // --- Timing Data ---
-      if (window.responseTimes?.ssvsStart && window.responseTimes?.ssvsEnd) {
-        rows.push(`Timing,ssvsDurationMs,${window.responseTimes.ssvsEnd - window.responseTimes.ssvsStart}`);
+      const ssvsDuration = localStorage.getItem("ssvsDuration");
+      if (ssvsDuration) {
+        rows.push(`Timing,ssvsDurationMs,${ssvsDuration}`);
       }
+
   
     // --- Download CSV ---
     const csvContent = "data:text/csv;charset=utf-8," + rows.join("\n");
