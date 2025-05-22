@@ -72,10 +72,12 @@ document.getElementById("ssvsForm").addEventListener("submit", function(e) {
   localStorage.setItem("SSVS", JSON.stringify(data));
 
   // ✅ Set end time before redirect
-  window.responseTimes.ssvsEnd = Date.now();
+    const endTime = Date.now();
+    window.responseTimes.ssvsEnd = endTime;
+    localStorage.setItem("ssvsDuration", endTime - window.responseTimes.ssvsStart);
 
-  const order = localStorage.getItem("SurveyOrder");
-window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
+    const order = localStorage.getItem("SurveyOrder");
+    window.location.href = order === "PANAS_first" ? "panas.html" : "stais.html";
 });
 </script>
 
