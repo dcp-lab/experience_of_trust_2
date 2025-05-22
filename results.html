@@ -131,6 +131,13 @@
           rows.push(`Timing,DictatorTrial${i + 1}DurationMs,${duration}`);
         });
       }
+      const trustDurations = JSON.parse(localStorage.getItem("trustDurations") || "[]");
+      if (trustDurations.length > 0) {
+        trustDurations.forEach((duration, i) => {
+          rows.push(`Timing,TrustTrial${i + 1}DurationMs,${duration}`);
+        });
+      }
+
  
     // --- Download CSV ---
     const csvContent = "data:text/csv;charset=utf-8," + rows.join("\n");
