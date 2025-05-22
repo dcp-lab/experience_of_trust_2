@@ -17,6 +17,11 @@
   </style>
 </head>
 <body>
+<script>
+  window.responseTimes = window.responseTimes || {};
+  window.responseTimes.dictatorTrialTimes = window.responseTimes.dictatorTrialTimes || [];
+  window.responseTimes.dictatorStartTime = Date.now();
+</script>
 <h3 id="roundHeader"></h3>
 <div id="waitingScreen" style="display: flex; justify-content: center; align-items: center; height: 200px; font-weight: bold; font-size: 20px; text-align: center;">
   Waiting for the decision of next Player A...
@@ -120,6 +125,11 @@
       localStorage.setItem("DictatorTrial", "0");
       const order = localStorage.getItem("SurveyOrder");
       const nextPage = order === "PANAS_first" ? "panas_post.html" : "stais_post.html";
+      const endTime = Date.now();
+      const duration = endTime - window.responseTimes.dictatorStartTime;
+      window.responseTimes.dictatorTrialTimes.push(duration);
+      window.responseTimes.dictatorStartTime = endTime;
+      localStorage.setItem("dictatorDurations", JSON.stringify(window.responseTimes.dictatorTrialTimes));
       window.location.href = nextPage;
     } else {
       localStorage.setItem("DictatorTrial", trial.toString());
