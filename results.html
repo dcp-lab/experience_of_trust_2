@@ -125,24 +125,18 @@
       if (staisPostDuration) {
       rows.push(`Timing,staisPostDurationMs,${staisPostDuration}`);
       }
-      const condition = localStorage.getItem("Condition");
       const trustDurations = JSON.parse(localStorage.getItem("trustDurations") || "[]");
-      if (condition === "TG" && trustDurations.length > 0) {
-        trustDurations.forEach((duration, i) => {
-          rows.push(`Timing,TrustTrial${i + 1}DurationMs,${duration}`);
-        });
-      }
+      trustDurations.forEach((duration, i) => {
+        rows.push(`Timing,TrustTrial${i + 1}DurationMs,${duration}`);
+      });
+      
       const dictatorDurations = JSON.parse(localStorage.getItem("dictatorDurations") || "[]");
-      if (condition === "DG" && dictatorDurations.length > 0) {
-        dictatorDurations.forEach((duration, i) => {
-          rows.push(`Timing,DictatorTrial${i + 1}DurationMs,${duration}`);
-        });
-      }
+      dictatorDurations.forEach((duration, i) => {
+        rows.push(`Timing,DictatorTrial${i + 1}DurationMs,${duration}`);
+      });
 
 
 
-
- 
     // --- Download CSV ---
     const csvContent = "data:text/csv;charset=utf-8," + rows.join("\n");
     const encodedUri = encodeURI(csvContent);
