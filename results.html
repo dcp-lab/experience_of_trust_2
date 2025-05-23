@@ -127,15 +127,13 @@
       rows.push(`Timing,staisPostDurationMs,${staisPostDuration}`);
       }
       const trustDurations = JSON.parse(localStorage.getItem("trustDurations") || "[]");
-      trustDurations.forEach((duration, i) => {
-        rows.push(`Timing,TrustTrial${i + 1}DurationMs,${duration}`);
-      });
-      
+      if (trustDurations.length > 0) {
+        rows.push(`Timing,TrustTrialDurations,"[${trustDurations.join(", ")}]"`);
+      }
       const dictatorDurations = JSON.parse(localStorage.getItem("dictatorDurations") || "[]");
-      dictatorDurations.forEach((duration, i) => {
-        rows.push(`Timing,DictatorTrial${i + 1}DurationMs,${duration}`);
-      });
-
+      if (dictatorDurations.length > 0) {
+        rows.push(`Timing,DictatorTrialDurations,"[${dictatorDurations.join(", ")}]"`);
+      }
 
 
     // --- Download CSV ---
