@@ -197,6 +197,7 @@
         updateGameContent();
         document.getElementById("waitingScreen").style.display = "none";
         document.getElementById("gameContent").style.display = "block";
+        window.responseTimes.dictatorStartTime = Date.now();
       }, 3000);
     } else {
       updateGameContent(); // fallback
