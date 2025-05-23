@@ -160,9 +160,10 @@
     document.getElementById("gameContent").style.display = "none";
 
     setTimeout(() => {
-      updateGameContent();
-      document.getElementById("waitingScreen").style.display = "none";
-      document.getElementById("gameContent").style.display = "block";
+    updateGameContent();
+    document.getElementById("waitingScreen").style.display = "none";
+    document.getElementById("gameContent").style.display = "block";
+    window.responseTimes.trustStartTime = Date.now();
     }, 3000);
   } else {
     // Skip waiting on final trial (you won't hit this unless logic is broken)
