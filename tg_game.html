@@ -148,16 +148,20 @@
   }
 
   function showGameAfterDelay() {
-    if (trial < trialValues.length) {
-      document.getElementById("waitingScreen").style.display = "flex";
-      document.getElementById("gameContent").style.display = "none";
-      setTimeout(() => {
-        updateGameContent();
-        document.getElementById("waitingScreen").style.display = "none";
-        document.getElementById("gameContent").style.display = "block";
+  if (trial < trialValues.length) {
+    document.getElementById("waitingScreen").style.display = "flex";
+    document.getElementById("gameContent").style.display = "none";
+
+    setTimeout(() => {
+      updateGameContent();
+      document.getElementById("waitingScreen").style.display = "none";
+      document.getElementById("gameContent").style.display = "block";
+
+        // ✅ Start timing when game content is shown
+        window.responseTimes.trustStartTime = Date.now();
       }, 3000);
     } else {
-      updateGameContent(); // fallback
+      updateGameContent();
     }
   }
 
