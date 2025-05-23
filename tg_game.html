@@ -68,7 +68,7 @@
 
 <script>
   window.responseTimes = window.responseTimes || {};
-  window.responseTimes.trustTrialTimes = window.responseTimes.trustTrialTimes || [];
+  window.responseTimes.trustTrialTimes = JSON.parse(localStorage.getItem("trustDurations") || "[]");
 </script>
 
 <h3 id="roundHeader"></h3>
