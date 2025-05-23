@@ -112,6 +112,7 @@
   window.responseTimes.dictatorTrialTimes = window.responseTimes.dictatorTrialTimes || [];
   window.responseTimes.dictatorStartTime = Date.now();
 
+
   let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
 
   if (!localStorage.getItem("DictatorTrialValues")) {
@@ -171,7 +172,6 @@
 
     const endTime = Date.now();
     const duration = endTime - window.responseTimes.dictatorStartTime;
-    window.responseTimes.dictatorTrialTimes = window.responseTimes.dictatorTrialTimes || [];
     window.responseTimes.dictatorTrialTimes.push(duration);
     window.responseTimes.dictatorStartTime = endTime;
     localStorage.setItem("dictatorDurations", JSON.stringify(window.responseTimes.dictatorTrialTimes));
