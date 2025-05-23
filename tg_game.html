@@ -195,6 +195,7 @@
 
     const endTime = Date.now();
     const duration = endTime - window.responseTimes.trustStartTime;
+    window.responseTimes.trustTrialTimes = window.responseTimes.trustTrialTimes || [];
     window.responseTimes.trustTrialTimes.push(duration);
     window.responseTimes.trustStartTime = endTime;
     localStorage.setItem("trustDurations", JSON.stringify(window.responseTimes.trustTrialTimes));
