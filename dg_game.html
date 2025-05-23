@@ -109,7 +109,7 @@
 
 <script>
   window.responseTimes = window.responseTimes || {};
-  window.responseTimes.dictatorTrialTimes = window.responseTimes.dictatorTrialTimes || [];
+  window.responseTimes.dictatorTrialTimes = JSON.parse(localStorage.getItem("dictatorDurations") || "[]");
 
   let trial = parseInt(localStorage.getItem("DictatorTrial") || "0");
 
